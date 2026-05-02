@@ -90,13 +90,13 @@ cursor:pointer;
 <span class="toggle" onclick="togglePassword()">👁</span>
 </div>
 
-<button class="btn" type="button" onclick="login()">LOGIN</button>
+<button class="btn" onclick="login()">LOGIN</button>
 
 </div>
 
 <script>
 
-// password toggle
+// password show/hide
 function togglePassword(){
 let p = document.getElementById("password");
 p.type = (p.type === "password") ? "text" : "password";
@@ -108,14 +108,16 @@ function login(){
 let username = document.getElementById("username").value;
 let password = document.getElementById("password").value;
 
-if(username === "" || password === ""){
-alert("Fill all fields");
-return;
-}
+// default mother user
+let users = [
+  {username:"mother", password:"1234", role:"mother"}
+];
 
-let users = JSON.parse(localStorage.getItem("users")) || [];
+// saved users (from panels)
+let savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+users = users.concat(savedUsers);
 
-// find user
+// check user
 let user = users.find(u => u.username === username && u.password === password);
 
 if(!user){
@@ -127,7 +129,7 @@ return;
 localStorage.setItem("role", user.role);
 localStorage.setItem("currentUser", user.username);
 
-// redirect system
+// redirect
 if(user.role === "mother"){
 location.href = "mother.html";
 }
