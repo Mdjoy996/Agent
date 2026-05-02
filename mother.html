@@ -113,7 +113,11 @@ box.innerHTML += `<p>👤 ${u.username}</p>`;
 }
 
 show();
-
+function logout(){
+localStorage.removeItem("role");
+localStorage.removeItem("currentUser");
+location.href = "index.html";
+}
 </script>
 
 </body>
