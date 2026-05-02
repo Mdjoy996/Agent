@@ -1,90 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
+<title>Dashboard</title>
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#f5f5f5;
+padding:50px;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Dashboard</h2>
+<h1>Welcome Dashboard</h1>
 
-<div>
-  <button onclick="show('home')">Home</button>
-  <button onclick="show('profile')">Profile</button>
-  <button onclick="show('reports')">Reports</button>
+<p id="user"></p>
+<p id="role"></p>
 
-  <button onclick="openPanel('mother')">Mother Panel</button>
-  <button onclick="openPanel('superadmin')">Super Admin</button>
-  <button onclick="openPanel('admin')">Admin</button>
-  <button onclick="openPanel('agent')">Agent</button>
-
-  <button onclick="logout()">Logout</button>
-</div>
-
-<hr>
-
-<div id="content"></div>
+<button onclick="logout()">Logout</button>
 
 <script>
 
-// 🔐 login check
-if(localStorage.getItem("auth") !== "true"){
-  location.href = "index.html";
-}
-
+let user = localStorage.getItem("currentUser");
 let role = localStorage.getItem("role");
 
-// default page
-show("home");
+document.getElementById("user").innerText = "User: " + user;
+document.getElementById("role").innerText = "Role: " + role;
 
-function show(page){
-
-let c = document.getElementById("content");
-
-if(page === "home"){
-  c.innerHTML = "<h3>Welcome Dashboard</h3>";
-}
-else if(page === "profile"){
-  c.innerHTML = "<h3>My Profile</h3>";
-}
-else if(page === "reports"){
-  c.innerHTML = "<h3>Reports Section</h3>";
-}
-
-}
-
-// 🔐 role based panel
-function openPanel(type){
-
-if(type === "mother"){
-  if(role !== "mother"){
-    alert("Access Denied");
-    return;
-  }
-  location.href = "mother.html";
-}
-
-if(type === "superadmin"){
-  if(role !== "superadmin" && role !== "mother"){
-    alert("Access Denied");
-    return;
-  }
-  location.href = "superadmin.html";
-}
-
-if(type === "admin"){
-  location.href = "admin.html";
-}
-
-if(type === "agent"){
-  location.href = "agent.html";
-}
-
-}
-
-// logout
 function logout(){
-  localStorage.clear();
-  location.href = "index.html";
+localStorage.clear();
+location.href = "index.html";
 }
 
 </script>
