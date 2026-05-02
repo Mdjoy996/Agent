@@ -5,6 +5,13 @@
 </head>
 <body>
 
+<script>
+// 🔐 SECURITY CHECK
+if(localStorage.getItem("role") !== "mother"){
+  document.body.innerHTML = "<h2>Access Denied</h2>";
+}
+</script>
+
 <h2>Mother Panel</h2>
 <p>Create Super Admin Only</p>
 
@@ -28,9 +35,22 @@ function create(){
 let u = document.getElementById("username").value;
 let p = document.getElementById("password").value;
 
+if(u === "" || p === ""){
+  alert("Fill all fields");
+  return;
+}
+
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// only superadmin create
+// duplicate check
+let exist = users.find(x => x.username === u);
+
+if(exist){
+  alert("User already exists");
+  return;
+}
+
+// add superadmin
 users.push({
   username: u,
   password: p,
@@ -53,13 +73,18 @@ let box = document.getElementById("list");
 
 box.innerHTML = "";
 
+let found = false;
+
 users.forEach(u=>{
   if(u.role === "superadmin"){
-    box.innerHTML += `
-      <p>${u.username}</p>
-    `;
+    found = true;
+    box.innerHTML += `<p>👤 ${u.username}</p>`;
   }
 });
+
+if(!found){
+  box.innerHTML = "<p>No Super Admin Found</p>";
+}
 
 }
 
