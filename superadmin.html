@@ -6,75 +6,66 @@
 <body>
 
 <h2>Super Admin Panel</h2>
+<p>Create Admin Only</p>
 
-<button onclick="loadUsers()">Refresh Users</button>
+<input id="username" placeholder="Admin Username"><br><br>
+<input id="password" placeholder="Password"><br><br>
+
+<button onclick="createAdmin()">Create Admin</button>
 
 <hr>
 
-<h3>Pending Users</h3>
-<div id="pending"></div>
-
-<h3>Approved Users</h3>
-<div id="approved"></div>
+<h3>Admin List</h3>
+<div id="list"></div>
 
 <script>
 
-// load on open
-loadUsers();
+// check login
+if(localStorage.getItem("role") !== "superadmin"){
+  document.body.innerHTML = "<h2>Access Denied</h2>";
+}
 
-function loadUsers(){
+// load users
+load();
+
+function createAdmin(){
+
+let u = document.getElementById("username").value;
+let p = document.getElementById("password").value;
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-let pendingBox = document.getElementById("pending");
-let approvedBox = document.getElementById("approved");
-
-pendingBox.innerHTML = "";
-approvedBox.innerHTML = "";
-
-// loop users
-users.forEach((u,i)=>{
-
-// default status (if not set)
-if(!u.status){
-  u.status = "pending";
-}
-
-// pending
-if(u.status === "pending"){
-  pendingBox.innerHTML += `
-    <p>
-      ${u.username} (${u.role})
-      <button onclick="approve(${i})">Approve</button>
-    </p>
-  `;
-}
-
-// approved
-if(u.status === "approved"){
-  approvedBox.innerHTML += `
-    <p>
-      ${u.username} (${u.role}) ✔ Approved
-    </p>
-  `;
-}
-
+// add admin
+users.push({
+  username: u,
+  password: p,
+  role: "admin",
+  createdBy: "superadmin",
+  status: "approved"
 });
-
-}
-
-// approve user
-function approve(index){
-
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-users[index].status = "approved";
 
 localStorage.setItem("users", JSON.stringify(users));
 
-alert("User Approved!");
+alert("Admin Created");
 
-loadUsers();
+load();
+}
+
+function load(){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let box = document.getElementById("list");
+
+box.innerHTML = "";
+
+users.forEach(u=>{
+  if(u.role === "admin"){
+    box.innerHTML += `
+      <p>${u.username}</p>
+    `;
+  }
+});
+
 }
 
 </script>
