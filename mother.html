@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mother Panel</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#0f172a;color:white;}
+.top{background:#020617;padding:15px;display:flex;justify-content:space-between;}
+.main{padding:20px;}
+button{padding:10px;background:#22c55e;border:none;border-radius:6px;cursor:pointer;}
+table{width:100%;margin-top:20px;border-collapse:collapse;}
+td,th{padding:10px;border-bottom:1px solid #1e293b;}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;}
+.box{background:#020617;padding:20px;border-radius:10px;width:300px;}
+input{width:100%;padding:10px;margin-top:10px;}
+</style>
+
+</head>
+
+<body>
+
+<div class="top">
+<b>Mother Panel</b>
+<button onclick="logout()">Logout</button>
+</div>
+
+<div class="main">
+
+<h2>Super Admin Control</h2>
+
+<button onclick="openModal()">➕ Add Super Admin</button>
+
+<p>Total: <span id="count">0</span></p>
+
+<table>
+<tr>
+<th>Name</th>
+<th>User</th>
+<th>Pass</th>
+<th>Action</th>
+</tr>
+
+<tbody id="table"></tbody>
+</table>
+
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="box">
+
+<h3>Create Super Admin</h3>
+
+<input id="name" placeholder="Name">
+<input id="user" placeholder="Username">
+<input id="pass" placeholder="Password">
+
+<button onclick="create()">Create</button>
+<button onclick="closeModal()" style="background:red;color:white;">Cancel</button>
+
+</div>
+</div>
+
+<script>
+let data=[];
+
+function openModal(){
+modal.style.display="flex";
+}
+
+function closeModal(){
+modal.style.display="none";
+}
+
+function create(){
+
+let name=document.getElementById("name").value;
+let user=document.getElementById("user").value;
+let pass=document.getElementById("pass").value;
+
+if(!name || !user || !pass){
+alert("Fill all");
+return;
+}
+
+if(data.length>=5){
+alert("Max 5 allowed");
+return;
+}
+
+data.push({name,user,pass});
+render();
+
+count.innerText=data.length;
+
+closeModal();
+}
+
+function render(){
+let html="";
+data.forEach((d,i)=>{
+html+=`
+<tr>
+<td>${d.name}</td>
+<td>${d.user}</td>
+<td>${d.pass}</td>
+<td><button onclick="del(${i})">Delete</button></td>
+</tr>
+`;
+});
+table.innerHTML=html;
+}
+
+function del(i){
+data.splice(i,1);
+render();
+count.innerText=data.length;
+}
+
+function logout(){
+localStorage.clear();
+location.href="index.html";
+}
+</script>
+
+</body>
+</html>
