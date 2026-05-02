@@ -1,1 +1,43 @@
-herejsh
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+
+<body>
+
+<h2>Dashboard Panel</h2>
+
+<div>
+  <button onclick="showPage('downline')">Downline</button>
+  <button onclick="showPage('account')">Account</button>
+  <button onclick="showPage('reports')">Reports</button>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<div id="content"></div>
+
+<script>
+// 🔐 LOGIN CHECK
+if(localStorage.getItem("auth") !== "true"){
+  window.location.href = "index.html";
+}
+
+// 📄 PAGE SWITCH
+function showPage(page){
+  document.getElementById("content").innerHTML =
+    "<h3>"+page+" Page Opened</h3>";
+}
+
+// 🚪 LOGOUT
+function logout(){
+  localStorage.clear();
+  window.location.href = "index.html";
+}
+
+// DEFAULT PAGE LOAD
+showPage("downline");
+</script>
+
+</body>
+</html>
