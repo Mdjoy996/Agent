@@ -6,47 +6,66 @@
 <body>
 
 <h2>Agent Panel</h2>
+<p>Create User Only</p>
 
-<div id="info"></div>
+<input id="username" placeholder="User Username"><br><br>
+<input id="password" placeholder="Password"><br><br>
 
-<button onclick="logout()">Logout</button>
+<button onclick="createUser()">Create User</button>
+
+<hr>
+
+<h3>User List</h3>
+<div id="list"></div>
 
 <script>
 
-// 🔐 check login
-let role = localStorage.getItem("role");
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-if(role !== "agent"){
+// access check
+if(localStorage.getItem("role") !== "agent"){
   document.body.innerHTML = "<h2>Access Denied</h2>";
 }
 
-// show approved users only
-function load(){
-
-let box = document.getElementById("info");
-box.innerHTML = "<h3>Approved Users List</h3>";
-
-users.forEach(u=>{
-
-if(u.status === "approved" && u.role !== "mother"){
-
-box.innerHTML += `
-  <p>${u.username} (${u.role}) ✔</p>
-`;
-
-}
-
-});
-
-}
-
+// load users
 load();
 
-// logout
-function logout(){
-  localStorage.clear();
-  location.href = "index.html";
+function createUser(){
+
+let u = document.getElementById("username").value;
+let p = document.getElementById("password").value;
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+// add user (final level)
+users.push({
+  username: u,
+  password: p,
+  role: "user",
+  createdBy: "agent",
+  status: "pending"
+});
+
+localStorage.setItem("users", JSON.stringify(users));
+
+alert("User Created (Pending)");
+
+load();
+}
+
+function load(){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let box = document.getElementById("list");
+
+box.innerHTML = "";
+
+users.forEach(u=>{
+  if(u.role === "user"){
+    box.innerHTML += `
+      <p>${u.username} - ${u.status}</p>
+    `;
+  }
+});
+
 }
 
 </script>
