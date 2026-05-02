@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Dashboard</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b1220;
+color:white;
+}
+
+.topbar{
+background:#020617;
+padding:15px;
+display:flex;
+justify-content:space-between;
+border-bottom:1px solid #1e293b;
+}
+
+.container{
+padding:20px;
+}
+
+button{
+padding:10px 15px;
+background:#22c55e;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button.red{
+background:#ef4444;
+color:white;
+}
+
+/* TABLE */
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #1e293b;
+}
+
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+justify-content:center;
+align-items:center;
+}
+
+.box{
+background:#111827;
+padding:20px;
+border-radius:10px;
+width:320px;
+}
+
+.box input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:none;
+border-radius:6px;
+background:#1f2937;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP -->
+<div class="topbar">
+<div><b>Agent Panel</b></div>
+<button class="red" onclick="logout()">Logout</button>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+<h2>User Management</h2>
+
+<button onclick="openModal()">➕ Add User</button>
+
+<p>Total User: <b id="count">0</b></p>
+
+<table>
+<tr>
+<th>Name</th>
+<th>Username</th>
+<th>Password</th>
+<th>Action</th>
+</tr>
+
+<tbody id="table"></tbody>
+</table>
+
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+
+<div class="box">
+
+<h3>Create User</h3>
+
+<input id="name" placeholder="Name">
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+
+<button onclick="create()">Create</button>
+<button class="red" onclick="closeModal()">Cancel</button>
+
+</div>
+</div>
+
+<script>
+
+let users = [];
+
+function openModal(){
+document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+function create(){
+
+let name=document.getElementById("name").value;
+let user=document.getElementById("user").value;
+let pass=document.getElementById("pass").value;
+
+if(!name || !user || !pass){
+alert("Fill all fields");
+return;
+}
+
+users.push({name,user,pass});
+
+render();
+
+document.getElementById("count").innerText = users.length;
+
+closeModal();
+
+document.getElementById("name").value="";
+document.getElementById("user").value="";
+document.getElementById("pass").value="";
+}
+
+function render(){
+
+let html="";
+
+users.forEach((a,i)=>{
+html+=`
+<tr>
+<td>${a.name}</td>
+<td>${a.user}</td>
+<td>${a.pass}</td>
+<td>
+<button class="red" onclick="del(${i})">Delete</button>
+</td>
+</tr>
+`;
+});
+
+document.getElementById("table").innerHTML=html;
+}
+
+function del(i){
+users.splice(i,1);
+render();
+document.getElementById("count").innerText = users.length;
+}
+
+function logout(){
+localStorage.clear();
+location.href="index.html";
+}
+
+</script>
+
+</body>
+</html>
