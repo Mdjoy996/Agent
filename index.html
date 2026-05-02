@@ -50,7 +50,7 @@ background:#f2f2f2;
 box-sizing:border-box;
 }
 
-/* PASSWORD ICON */
+/* PASSWORD BOX */
 .passwordBox{
 position:relative;
 }
@@ -59,6 +59,7 @@ position:relative;
 padding-right:45px;
 }
 
+/* EYE ICON */
 .toggle{
 position:absolute;
 right:15px;
@@ -148,10 +149,9 @@ color:#000;
 <input type="text" id="username" placeholder="Username" required>
 </div>
 
-<!-- PASSWORD WITH EYE ICON -->
 <div class="inputBox passwordBox">
-  <input type="password" id="password" placeholder="Password" required>
-  <span class="toggle" onclick="togglePassword()">👁</span>
+<input type="password" id="password" placeholder="Password" required>
+<span class="toggle" onclick="togglePassword()">👁</span>
 </div>
 
 <button class="btn" type="submit">LOGIN</button>
@@ -188,21 +188,32 @@ This platform is for entertainment purposes only.
 All users must agree to our policies before using services.
 </div>
 
+<!-- JS -->
 <script>
-function login() {
-  const email = document.getElementById("email").value;
-  const pass = document.getElementById("pass").value;
+document.getElementById("loginForm").addEventListener("submit", function(e){
+  e.preventDefault();
 
-  const validEmail = "admin@test.com";
+  const user = document.getElementById("username").value;
+  const pass = document.getElementById("password").value;
+
+  const validUser = "admin@test.com";
   const validPass = "123456";
 
-  if(email.trim() === validEmail && pass.trim() === validPass) {
-    localStorage.setItem("auth", "true");
-    alert("Login successful");
-    window.location.href = "index.html";
+  if(user.trim() === validUser && pass.trim() === validPass){
+    localStorage.setItem("auth","true");
+    alert("Login Successful");
+
+    // redirect to dashboard (agent site)
+    window.location.href = "dashboard.html";
   } else {
-    alert("Invalid login");
+    alert("Invalid Login");
   }
+});
+
+// toggle password
+function togglePassword(){
+  const pass = document.getElementById("password");
+  pass.type = pass.type === "password" ? "text" : "password";
 }
 </script>
 
