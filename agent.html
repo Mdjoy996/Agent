@@ -2,68 +2,138 @@
 <html>
 <head>
 <title>Agent Panel</title>
+
 <style>
 body{
+margin:0;
 font-family:Arial;
-background:#f5f5f5;
-padding:20px;
+background:#f2f2f2;
 }
 
-h2{
-color:#333;
-}
-
-input{
-width:100%;
+/* TOP BAR */
+.topbar{
+background:#f4b400;
 padding:10px;
-margin:8px 0;
-border-radius:8px;
-border:1px solid #ccc;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:#000;
+font-weight:bold;
+}
+
+/* MENU */
+.menu{
+background:#222;
+color:#fff;
+padding:10px;
+font-size:14px;
+}
+
+/* STATS */
+.stats{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+padding:10px;
+}
+
+.card{
+background:#fff;
+padding:10px;
+flex:1;
+min-width:120px;
+border-radius:5px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+font-size:13px;
+}
+
+/* TABLE */
+.table-box{
+background:#fff;
+margin:10px;
+padding:10px;
+border-radius:5px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+}
+
+th{
+background:#000;
+color:#fff;
 }
 
 button{
-padding:10px;
-width:100%;
-background:black;
-color:#ffcc00;
+padding:5px 10px;
 border:none;
-border-radius:8px;
 cursor:pointer;
+border-radius:3px;
 }
 
-.box{
-background:white;
-padding:15px;
-border-radius:10px;
-margin-top:20px;
+.add{
+background:#28a745;
+color:#fff;
+}
+
+.del{
+background:red;
+color:#fff;
 }
 </style>
 </head>
 
 <body>
-  
-<button onclick="logout()">Logout</button>
-  
-<h2>Agent Panel</h2>
-<p>Create User Only</p>
 
-<div class="box">
-
-<input id="username" placeholder="User Username">
-<input id="password" placeholder="Password">
-
-<button onclick="create()">Create User</button>
-
+<!-- TOP BAR -->
+<div class="topbar">
+  Gamebuzz Panel
+  <button onclick="logout()">Logout</button>
 </div>
 
-<div class="box">
-<h3>User List</h3>
-<div id="list"></div>
+<!-- MENU -->
+<div class="menu">
+Dashboard | Agents | Reports | Banking
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="card">Balance: 1000</div>
+  <div class="card">Exposure: 0</div>
+  <div class="card">Profit/Loss: 0</div>
+</div>
+
+<!-- TABLE -->
+<div class="table-box">
+
+<button class="add" onclick="create()">+ Add User</button>
+
+<table>
+<thead>
+<tr>
+<th>Username</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="list"></tbody>
+
+</table>
+
 </div>
 
 <script>
 
-// login check
+// role check
 let role = localStorage.getItem("role");
 if(role !== "agent"){
 alert("Access Denied");
@@ -73,31 +143,28 @@ location.href = "index.html";
 // create user
 function create(){
 
-let u = document.getElementById("username").value;
-let p = document.getElementById("password").value;
+let name = prompt("Enter username:");
+let pass = prompt("Enter password:");
 
-if(u === "" || p === ""){
-alert("Fill all fields");
+if(!name || !pass){
+alert("Fill all");
 return;
 }
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
 users.push({
-username: u,
-password: p,
-role: "user",
-createdBy: "agent"
+username:name,
+password:pass,
+role:"user"
 });
 
 localStorage.setItem("users", JSON.stringify(users));
 
-alert("User Created");
-
 show();
 }
 
-// show list
+// show users
 function show(){
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
@@ -107,18 +174,35 @@ box.innerHTML = "";
 
 users.forEach(u=>{
 if(u.role === "user"){
-box.innerHTML += `<p>👤 ${u.username}</p>`;
+box.innerHTML += `
+<tr>
+<td>${u.username}</td>
+<td>Active</td>
+<td>
+<button class="del" onclick="del('${u.username}')">Delete</button>
+</td>
+</tr>
+`;
 }
 });
 
 }
 
+function del(name){
+let users = JSON.parse(localStorage.getItem("users")) || [];
+users = users.filter(u => u.username !== name);
+localStorage.setItem("users", JSON.stringify(users));
 show();
-function logout(){
-localStorage.removeItem("role");
-localStorage.removeItem("currentUser");
-location.href = "index.html";
 }
+
+// logout
+function logout(){
+localStorage.clear();
+location.href="index.html";
+}
+
+show();
+
 </script>
 
 </body>
