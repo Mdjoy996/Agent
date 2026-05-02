@@ -189,51 +189,54 @@ All users must agree to our policies before using services.
 </div>
 
 <!-- JS -->
+  
 <script>
+
 async function login(){
 
-let res = await fetch("http://localhost:5000/login",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-username:document.getElementById("username").value,
-password:document.getElementById("password").value
-})
-});
+let username = document.getElementById("username").value;
+let password = document.getElementById("password").value;
 
-let data = await res.json();
+// 🔥 DEMO USERS (API ছাড়া)
+let users = [
+  {username:"mother", password:"1234", role:"mother"},
+  {username:"superadmin", password:"1234", role:"superadmin"},
+  {username:"admin", password:"1234", role:"admin"},
+  {username:"subadmin", password:"1234", role:"subadmin"},
+  {username:"superagent", password:"1234", role:"superagent"},
+  {username:"agent", password:"1234", role:"agent"}
+];
 
-if(data.token){
+let user = users.find(u => u.username === username && u.password === password);
 
-localStorage.setItem("token",data.token);
-localStorage.setItem("role",data.role);
+if(user){
 
-// 🔥 FULL ROLE REDIRECT SYSTEM
+localStorage.setItem("token","demo123"); // fake token
+localStorage.setItem("role",user.role);
 
-if(data.role === "mother"){
+// 🔁 SAME REDIRECT SYSTEM (আপনার মতোই)
+
+if(user.role === "mother"){
 location.href="mother.html";
 }
-else if(data.role === "superadmin"){
+else if(user.role === "superadmin"){
 location.href="superadmin.html";
 }
-else if(data.role === "admin"){
+else if(user.role === "admin"){
 location.href="admin.html";
 }
-else if(data.role === "subadmin"){
+else if(user.role === "subadmin"){
 location.href="subadmin.html";
 }
-else if(data.role === "superagent"){
+else if(user.role === "superagent"){
 location.href="superagent.html";
 }
-else if(data.role === "agent"){
+else if(user.role === "agent"){
 location.href="agent.html";
-}
-else{
-alert("Role not found");
 }
 
 }else{
-alert(data.error);
+alert("Wrong username or password");
 }
 
 }
