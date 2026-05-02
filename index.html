@@ -190,30 +190,52 @@ All users must agree to our policies before using services.
 
 <!-- JS -->
 <script>
-document.getElementById("loginForm").addEventListener("submit", function(e){
-  e.preventDefault();
+async function login(){
 
-  const user = document.getElementById("username").value;
-  const pass = document.getElementById("password").value;
-
-  const validUser = "admin@test.com";
-  const validPass = "123456";
-
-  if(user.trim() === validUser && pass.trim() === validPass){
-    localStorage.setItem("auth","true");
-    alert("Login Successful");
-
-    // redirect to dashboard (agent site)
-    window.location.href = "dashboard.html";
-  } else {
-    alert("Invalid Login");
-  }
+let res = await fetch("http://localhost:5000/login",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+username:document.getElementById("username").value,
+password:document.getElementById("password").value
+})
 });
 
-// toggle password
-function togglePassword(){
-  const pass = document.getElementById("password");
-  pass.type = pass.type === "password" ? "text" : "password";
+let data = await res.json();
+
+if(data.token){
+
+localStorage.setItem("token",data.token);
+localStorage.setItem("role",data.role);
+
+// 🔥 FULL ROLE REDIRECT SYSTEM
+
+if(data.role === "mother"){
+location.href="mother.html";
+}
+else if(data.role === "superadmin"){
+location.href="superadmin.html";
+}
+else if(data.role === "admin"){
+location.href="admin.html";
+}
+else if(data.role === "subadmin"){
+location.href="subadmin.html";
+}
+else if(data.role === "superagent"){
+location.href="superagent.html";
+}
+else if(data.role === "agent"){
+location.href="agent.html";
+}
+else{
+alert("Role not found");
+}
+
+}else{
+alert(data.error);
+}
+
 }
 </script>
 
