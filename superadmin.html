@@ -1,303 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Super Admin</title>
-
-<style>
-body{
-margin:0;
-font-family:Arial;
-background:#0f172a;
-color:#e5e7eb;
-}
-
-/* TOPBAR */
-.topbar{
-height:60px;
-background:#020617;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 20px;
-border-bottom:1px solid #1e293b;
-}
-
-.logo{
-font-weight:bold;
-font-size:18px;
-color:#22c55e;
-}
-
-.top-right{
-display:flex;
-gap:10px;
-align-items:center;
-}
-
-.balance{
-background:#1e293b;
-padding:6px 12px;
-border-radius:6px;
-font-size:13px;
-}
-
-/* SIDEBAR */
-.sidebar{
-width:220px;
-height:100vh;
-position:fixed;
-background:#020617;
-padding:15px;
-border-right:1px solid #1e293b;
-}
-
-.menu{
-margin-top:20px;
-}
-
-.menu div{
-padding:10px;
-margin-bottom:8px;
-border-radius:8px;
-cursor:pointer;
-color:#94a3b8;
-}
-
-.menu div:hover{
-background:#1e293b;
-color:white;
-}
-
-.active{
-background:#22c55e;
-color:black;
-font-weight:bold;
-}
-
-/* MAIN */
-.main{
-margin-left:240px;
-padding:20px;
-}
-
-/* CARDS */
-.cards{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-}
-
-.card{
-background:#020617;
-padding:15px;
-border-radius:10px;
-border:1px solid #1e293b;
-}
-
-.card b{
-font-size:18px;
-}
-
-/* BUTTON */
-.add-btn{
-margin-top:15px;
-padding:10px 15px;
-background:#22c55e;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* TABLE */
-table{
-width:100%;
-margin-top:20px;
-border-collapse:collapse;
-}
-
-th{
-text-align:left;
-padding:10px;
-background:#020617;
-}
-
-td{
-padding:10px;
-border-bottom:1px solid #1e293b;
-}
-
-.delete{
-background:#ef4444;
-color:white;
-border:none;
-padding:5px 10px;
-border-radius:6px;
-cursor:pointer;
-}
-
-/* MODAL */
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-justify-content:center;
-align-items:center;
-}
-
-.modal-box{
-background:#020617;
-padding:20px;
-border-radius:10px;
-width:300px;
-border:1px solid #1e293b;
-}
-
-.modal-box input{
-width:100%;
-padding:10px;
-margin-top:10px;
-background:#1e293b;
-border:none;
-color:white;
-border-radius:6px;
-}
-
-.modal-box button{
-width:100%;
-margin-top:10px;
-padding:10px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
-</style>
+  <title>Super Admin Panel</title>
 </head>
-
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-<div class="logo">Super Admin</div>
+<h2>Super Admin Panel</h2>
 
-<div class="top-right">
-<div class="balance">Balance: 1000</div>
-<button onclick="logout()" style="background:#ef4444;border:none;padding:6px 10px;border-radius:6px;color:white;">Logout</button>
-</div>
-</div>
+<button onclick="loadUsers()">Refresh Users</button>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-<div class="menu">
-<div class="active">Dashboard</div>
-<div onclick="openModal()">➕ Add Admin</div>
-<div>Reports</div>
-<div>All Agents</div>
-</div>
-</div>
+<hr>
 
-<!-- MAIN -->
-<div class="main">
+<h3>Pending Users</h3>
+<div id="pending"></div>
 
-<h2>Dashboard</h2>
-
-<div class="cards">
-<div class="card">Total Admin<br><b id="count">0</b></div>
-<div class="card">Agents<br><b>0</b></div>
-<div class="card">Balance<br><b>1000</b></div>
-<div class="card">Exposure<br><b>(0)</b></div>
-</div>
-
-<button class="add-btn" onclick="openModal()">+ Add Admin</button>
-
-<table>
-<tr>
-<th>Name</th>
-<th>Username</th>
-<th>Password</th>
-<th>Action</th>
-</tr>
-
-<tbody id="table"></tbody>
-</table>
-
-</div>
-
-<!-- MODAL -->
-<div id="modal" class="modal">
-<div class="modal-box">
-
-<h3>Add Admin</h3>
-
-<input id="name" placeholder="Name">
-<input id="user" placeholder="Username">
-<input id="pass" placeholder="Password">
-
-<button onclick="create()">Create</button>
-<button onclick="closeModal()" style="background:#ef4444;color:white;">Cancel</button>
-
-</div>
-</div>
+<h3>Approved Users</h3>
+<div id="approved"></div>
 
 <script>
-let data=[];
 
-function openModal(){
-document.getElementById("modal").style.display="flex";
+// load on open
+loadUsers();
+
+function loadUsers(){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+let pendingBox = document.getElementById("pending");
+let approvedBox = document.getElementById("approved");
+
+pendingBox.innerHTML = "";
+approvedBox.innerHTML = "";
+
+// loop users
+users.forEach((u,i)=>{
+
+// default status (if not set)
+if(!u.status){
+  u.status = "pending";
 }
 
-function closeModal(){
-document.getElementById("modal").style.display="none";
+// pending
+if(u.status === "pending"){
+  pendingBox.innerHTML += `
+    <p>
+      ${u.username} (${u.role})
+      <button onclick="approve(${i})">Approve</button>
+    </p>
+  `;
 }
 
-function create(){
-let name=document.getElementById("name").value;
-let user=document.getElementById("user").value;
-let pass=document.getElementById("pass").value;
-
-if(!name || !user || !pass){
-alert("Fill all");
-return;
+// approved
+if(u.status === "approved"){
+  approvedBox.innerHTML += `
+    <p>
+      ${u.username} (${u.role}) ✔ Approved
+    </p>
+  `;
 }
 
-data.push({name,user,pass});
-render();
-
-document.getElementById("count").innerText=data.length;
-
-closeModal();
-}
-
-function render(){
-let html="";
-data.forEach((d,i)=>{
-html+=`
-<tr>
-<td>${d.name}</td>
-<td>${d.user}</td>
-<td>${d.pass}</td>
-<td><button class="delete" onclick="del(${i})">Delete</button></td>
-</tr>
-`;
 });
-document.getElementById("table").innerHTML=html;
+
 }
 
-function del(i){
-data.splice(i,1);
-render();
-document.getElementById("count").innerText=data.length;
+// approve user
+function approve(index){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+users[index].status = "approved";
+
+localStorage.setItem("users", JSON.stringify(users));
+
+alert("User Approved!");
+
+loadUsers();
 }
 
-function logout(){
-localStorage.clear();
-window.location.href="index.html";
-}
 </script>
 
 </body>
