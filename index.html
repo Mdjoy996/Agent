@@ -191,52 +191,32 @@ All users must agree to our policies before using services.
 <!-- JS -->
   
 <script>
-
 async function login(){
 
 let username = document.getElementById("username").value;
 let password = document.getElementById("password").value;
 
-// 🔥 DEMO USERS (API ছাড়া)
+// default users (mother)
 let users = [
-  {username:"mother", password:"1234", role:"mother"},
-  {username:"superadmin", password:"1234", role:"superadmin"},
-  {username:"admin", password:"1234", role:"admin"},
-  {username:"subadmin", password:"1234", role:"subadmin"},
-  {username:"superagent", password:"1234", role:"superagent"},
-  {username:"agent", password:"1234", role:"agent"}
+  {username:"mother", password:"1234", role:"mother"}
 ];
 
+// created users add করুন
+let savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+users = users.concat(savedUsers);
+
+// match check
 let user = users.find(u => u.username === username && u.password === password);
 
 if(user){
 
-localStorage.setItem("token","demo123"); // fake token
 localStorage.setItem("role",user.role);
 
-// 🔁 SAME REDIRECT SYSTEM (আপনার মতোই)
-
-if(user.role === "mother"){
-location.href="mother.html";
-}
-else if(user.role === "superadmin"){
-location.href="superadmin.html";
-}
-else if(user.role === "admin"){
-location.href="admin.html";
-}
-else if(user.role === "subadmin"){
-location.href="subadmin.html";
-}
-else if(user.role === "superagent"){
-location.href="superagent.html";
-}
-else if(user.role === "agent"){
-location.href="agent.html";
-}
+// redirect
+location.href = user.role + ".html";
 
 }else{
-alert("Wrong username or password");
+alert("Wrong login");
 }
 
 }
