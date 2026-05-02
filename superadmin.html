@@ -1,57 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Super Admin Panel</title>
+<title>Super Admin Panel</title>
+<style>
+body{
+font-family:Arial;
+background:#f5f5f5;
+padding:20px;
+}
+
+h2{
+color:#333;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px;
+width:100%;
+background:black;
+color:#ffcc00;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.box{
+background:white;
+padding:15px;
+border-radius:10px;
+margin-top:20px;
+}
+</style>
 </head>
+
 <body>
 
 <h2>Super Admin Panel</h2>
 <p>Create Admin Only</p>
 
-<input id="username" placeholder="Admin Username"><br><br>
-<input id="password" placeholder="Password"><br><br>
+<div class="box">
 
-<button onclick="createAdmin()">Create Admin</button>
+<input id="username" placeholder="Admin Username">
+<input id="password" placeholder="Password">
 
-<hr>
+<button onclick="create()">Create Admin</button>
 
+</div>
+
+<div class="box">
 <h3>Admin List</h3>
 <div id="list"></div>
+</div>
 
 <script>
 
-// check login
-if(localStorage.getItem("role") !== "superadmin"){
-  document.body.innerHTML = "<h2>Access Denied</h2>";
+// login check
+let role = localStorage.getItem("role");
+if(role !== "superadmin"){
+alert("Access Denied");
+location.href = "index.html";
 }
 
-// load users
-load();
-
-function createAdmin(){
+// create admin
+function create(){
 
 let u = document.getElementById("username").value;
 let p = document.getElementById("password").value;
 
+if(u === "" || p === ""){
+alert("Fill all fields");
+return;
+}
+
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// add admin
 users.push({
-  username: u,
-  password: p,
-  role: "admin",
-  createdBy: "superadmin",
-  status: "approved"
+username: u,
+password: p,
+role: "admin",
+createdBy: "superadmin"
 });
 
 localStorage.setItem("users", JSON.stringify(users));
 
 alert("Admin Created");
 
-load();
+show();
 }
 
-function load(){
+// show list
+function show(){
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
 let box = document.getElementById("list");
@@ -59,14 +104,14 @@ let box = document.getElementById("list");
 box.innerHTML = "";
 
 users.forEach(u=>{
-  if(u.role === "admin"){
-    box.innerHTML += `
-      <p>${u.username}</p>
-    `;
-  }
+if(u.role === "admin"){
+box.innerHTML += `<p>👤 ${u.username}</p>`;
+}
 });
 
 }
+
+show();
 
 </script>
 
