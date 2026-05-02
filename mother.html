@@ -5,62 +5,60 @@
 </head>
 <body>
 
-<h2>Mother Panel - Create User</h2>
+<h2>Mother Panel</h2>
+<p>Create Super Admin Only</p>
 
-<input id="newUser" placeholder="Username"><br><br>
-<input id="newPass" placeholder="Password"><br><br>
+<input id="username" placeholder="Super Admin Username"><br><br>
+<input id="password" placeholder="Password"><br><br>
 
-<select id="role">
-  <option value="superadmin">Super Admin</option>
-  <option value="admin">Admin</option>
-  <option value="agent">Agent</option>
-</select><br><br>
-
-<button onclick="createUser()">Create User</button>
+<button onclick="create()">Create Super Admin</button>
 
 <hr>
 
-<h3>Created Users</h3>
+<h3>Super Admin List</h3>
 <div id="list"></div>
 
 <script>
 
 // load users
-showUsers();
+show();
 
-function createUser(){
+function create(){
 
-let u = document.getElementById("newUser").value;
-let p = document.getElementById("newPass").value;
-let r = document.getElementById("role").value;
+let u = document.getElementById("username").value;
+let p = document.getElementById("password").value;
 
-// get old users
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// add new user
-users.push({username:u, password:p, role:r});
+// only superadmin create
+users.push({
+  username: u,
+  password: p,
+  role: "superadmin",
+  createdBy: "mother",
+  status: "approved"
+});
 
 localStorage.setItem("users", JSON.stringify(users));
 
-alert("User Created!");
+alert("Super Admin Created");
 
-showUsers();
+show();
 }
 
-// show users
-function showUsers(){
+function show(){
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
 let box = document.getElementById("list");
 
 box.innerHTML = "";
 
-users.forEach((u,i)=>{
-  box.innerHTML += `
-    <p>
-      ${i+1}. ${u.username} (${u.role})
-    </p>
-  `;
+users.forEach(u=>{
+  if(u.role === "superadmin"){
+    box.innerHTML += `
+      <p>${u.username}</p>
+    `;
+  }
 });
 
 }
