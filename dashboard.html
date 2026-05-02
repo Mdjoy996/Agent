@@ -2,144 +2,59 @@
 <html>
 <head>
   <title>Dashboard</title>
-  <style>
-    body{
-      margin:0;
-      font-family:Arial;
-      display:flex;
-      height:100vh;
-    }
-
-    .sidebar{
-      width:220px;
-      background:#111;
-      color:#fff;
-      padding:15px;
-    }
-
-    .sidebar button{
-      width:100%;
-      padding:10px;
-      margin:5px 0;
-      background:#222;
-      color:#fff;
-      border:none;
-      cursor:pointer;
-      text-align:left;
-    }
-
-    .sidebar button:hover{
-      background:#444;
-    }
-
-    .main{
-      flex:1;
-      padding:20px;
-    }
-
-    .topbar{
-      background:#eee;
-      padding:10px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    #content{
-      margin-top:20px;
-      padding:15px;
-      background:#f5f5f5;
-      border-radius:5px;
-    }
-  </style>
 </head>
-
 <body>
 
-<!-- 🔐 LOGIN CHECK -->
+<h2>Dashboard</h2>
+
+<div>
+  <button onclick="show('home')">Home</button>
+  <button onclick="show('profile')">Profile</button>
+  <button onclick="show('reports')">Reports</button>
+
+  <button onclick="openPanel('mother')">Mother Panel</button>
+  <button onclick="openPanel('superadmin')">Super Admin</button>
+  <button onclick="openPanel('admin')">Admin</button>
+  <button onclick="openPanel('agent')">Agent</button>
+
+  <button onclick="logout()">Logout</button>
+</div>
+
+<hr>
+
+<div id="content"></div>
+
 <script>
+
+// 🔐 login check
+if(localStorage.getItem("auth") !== "true"){
+  location.href = "index.html";
+}
+
 let role = localStorage.getItem("role");
 
-if(!role){
-  window.location.href = "index.html";
+// default page
+show("home");
+
+function show(page){
+
+let c = document.getElementById("content");
+
+if(page === "home"){
+  c.innerHTML = "<h3>Welcome Dashboard</h3>";
 }
-</script>
-
-<!-- SIDEBAR -->
-<div class="sidebar">
-
-  <h3>Menu</h3>
-
-  <button onclick="showPage('dashboard')">Dashboard</button>
-  <button onclick="showPage('profile')">My Profile</button>
-  <button onclick="showPage('reports')">Reports</button>
-  <button onclick="showPage('users')">Users</button>
-
-  <!-- Mother only -->
-  <button onclick="openPanel('mother')">Mother Panel</button>
-
-  <!-- Super Admin only -->
-  <button onclick="openPanel('superadmin')">Super Admin</button>
-
-  <!-- Admin -->
-  <button onclick="openPanel('admin')">Admin Panel</button>
-
-  <!-- Agent -->
-  <button onclick="openPanel('agent')">Agent Panel</button>
-
-  <br>
-  <button onclick="logout()">Logout</button>
-
-</div>
-
-<!-- MAIN -->
-<div class="main">
-
-  <div class="topbar">
-    <span id="roleText"></span>
-    <span>Dashboard</span>
-  </div>
-
-  <div id="content"></div>
-
-</div>
-
-<!-- SCRIPT -->
-<script>
-
-/* show role */
-document.getElementById("roleText").innerText =
-  "Role: " + role.toUpperCase();
-
-/* default page */
-showPage("dashboard");
-
-function showPage(page){
-
-let content = document.getElementById("content");
-
-if(page === "dashboard"){
-  content.innerHTML = "<h2>Welcome Dashboard</h2>";
+else if(page === "profile"){
+  c.innerHTML = "<h3>My Profile</h3>";
 }
-
-if(page === "profile"){
-  content.innerHTML = "<h2>My Profile</h2>";
-}
-
-if(page === "reports"){
-  content.innerHTML = "<h2>Reports Section</h2>";
-}
-
-if(page === "users"){
-  content.innerHTML = "<h2>User List</h2>";
+else if(page === "reports"){
+  c.innerHTML = "<h3>Reports Section</h3>";
 }
 
 }
 
-/* ROLE BASED PANEL CONTROL */
+// 🔐 role based panel
 function openPanel(type){
 
-// MOTHER
 if(type === "mother"){
   if(role !== "mother"){
     alert("Access Denied");
@@ -148,7 +63,6 @@ if(type === "mother"){
   location.href = "mother.html";
 }
 
-// SUPER ADMIN
 if(type === "superadmin"){
   if(role !== "superadmin" && role !== "mother"){
     alert("Access Denied");
@@ -157,26 +71,20 @@ if(type === "superadmin"){
   location.href = "superadmin.html";
 }
 
-// ADMIN
 if(type === "admin"){
-  if(role === "agent"){
-    alert("Access Denied");
-    return;
-  }
   location.href = "admin.html";
 }
 
-// AGENT
 if(type === "agent"){
   location.href = "agent.html";
 }
 
 }
 
-/* LOGOUT */
+// logout
 function logout(){
   localStorage.clear();
-  window.location.href = "index.html";
+  location.href = "index.html";
 }
 
 </script>
