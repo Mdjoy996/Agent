@@ -70,14 +70,6 @@ font-size:18px;
 font-weight:bold;
 cursor:pointer;
 }
-
-footer{
-background:#0b0b0b;
-color:#fff;
-padding:25px 15px;
-text-align:center;
-margin-top:50px;
-}
 </style>
 </head>
 
@@ -89,8 +81,6 @@ margin-top:50px;
 
 <div class="form">
 
-<form id="loginForm">
-
 <div class="inputBox">
 <input type="text" id="username" placeholder="Username">
 </div>
@@ -100,9 +90,7 @@ margin-top:50px;
 <span class="toggle" onclick="togglePassword()">👁</span>
 </div>
 
-<button class="btn" type="submit">LOGIN</button>
-
-</form>
+<button class="btn" type="button" onclick="login()">LOGIN</button>
 
 </div>
 
@@ -114,27 +102,20 @@ let p = document.getElementById("password");
 p.type = (p.type === "password") ? "text" : "password";
 }
 
-// form submit fix
-document.getElementById("loginForm").addEventListener("submit", function(e){
-e.preventDefault();
-login();
-});
-
+// LOGIN FUNCTION
 function login(){
 
 let username = document.getElementById("username").value;
 let password = document.getElementById("password").value;
 
-// default mother user
-let users = [
-  {username:"mother", password:"1234", role:"mother"}
-];
+if(username === "" || password === ""){
+alert("Fill all fields");
+return;
+}
 
-// saved users
-let savedUsers = JSON.parse(localStorage.getItem("users")) || [];
-users = users.concat(savedUsers);
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// match user
+// find user
 let user = users.find(u => u.username === username && u.password === password);
 
 if(!user){
@@ -146,7 +127,7 @@ return;
 localStorage.setItem("role", user.role);
 localStorage.setItem("currentUser", user.username);
 
-// redirect fix
+// redirect system
 if(user.role === "mother"){
 location.href = "mother.html";
 }
