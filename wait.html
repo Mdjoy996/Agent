@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Waiting</title>
+</head>
+<body>
+
+<h2>⏳ Waiting for Approval</h2>
+<p>Your account is pending</p>
+
+<button onclick="check()">Check Status</button>
+
+<script>
+
+function check(){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let currentUser = localStorage.getItem("currentUser");
+
+let user = users.find(u => u.username === currentUser);
+
+if(user && user.status === "approved"){
+  location.href = "dashboard.html";
+}else{
+  alert("Still pending...");
+}
+
+}
+
+</script>
+
+</body>
+</html>
