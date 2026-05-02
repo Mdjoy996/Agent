@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+</head>
+<body>
+
+<h2>Admin Panel</h2>
+<p>Create Agent Only</p>
+
+<input id="username" placeholder="Agent Username"><br><br>
+<input id="password" placeholder="Password"><br><br>
+
+<button onclick="createAgent()">Create Agent</button>
+
+<hr>
+
+<h3>Agent List</h3>
+<div id="list"></div>
+
+<script>
+
+// access check
+if(localStorage.getItem("role") !== "admin"){
+  document.body.innerHTML = "<h2>Access Denied</h2>";
+}
+
+// load agents
+load();
+
+function createAgent(){
+
+let u = document.getElementById("username").value;
+let p = document.getElementById("password").value;
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+// add agent
+users.push({
+  username: u,
+  password: p,
+  role: "agent",
+  createdBy: "admin",
+  status: "approved"
+});
+
+localStorage.setItem("users", JSON.stringify(users));
+
+alert("Agent Created");
+
+load();
+}
+
+function load(){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let box = document.getElementById("list");
+
+box.innerHTML = "";
+
+users.forEach(u=>{
+  if(u.role === "agent"){
+    box.innerHTML += `
+      <p>${u.username}</p>
+    `;
+  }
+});
+
+}
+
+</script>
+
+</body>
+</html>
