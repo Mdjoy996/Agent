@@ -189,30 +189,21 @@ All users must agree to our policies before using services.
 </div>
 
 <script>
-function togglePassword(){
-let password = document.getElementById("password");
+function login() {
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("pass").value;
 
-if(password.type === "password"){
-password.type = "text";
-} else {
-password.type = "password";
+  const validEmail = "admin@test.com";
+  const validPass = "123456";
+
+  if(email.trim() === validEmail && pass.trim() === validPass) {
+    localStorage.setItem("auth", "true");
+    alert("Login successful");
+  } else {
+    alert("Invalid login");
+  }
 }
-}
-
-document.getElementById("loginForm").addEventListener("submit", function(e){
-e.preventDefault();
-
-let user = document.getElementById("username").value;
-let pass = document.getElementById("password").value;
-
-if(user === admin && pass === 1234){
-alert("Login Successful ✅");
-window.location.href = "dashboard.html";
-} else {
-alert("Wrong Username or Password ❌");
-}
-});
-</script>
+ </script>
 
 </body>
 </html>
