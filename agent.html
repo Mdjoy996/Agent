@@ -1,57 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Agent Panel</title>
+<title>Agent Panel</title>
+<style>
+body{
+font-family:Arial;
+background:#f5f5f5;
+padding:20px;
+}
+
+h2{
+color:#333;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px;
+width:100%;
+background:black;
+color:#ffcc00;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.box{
+background:white;
+padding:15px;
+border-radius:10px;
+margin-top:20px;
+}
+</style>
 </head>
+
 <body>
 
 <h2>Agent Panel</h2>
 <p>Create User Only</p>
 
-<input id="username" placeholder="User Username"><br><br>
-<input id="password" placeholder="Password"><br><br>
+<div class="box">
 
-<button onclick="createUser()">Create User</button>
+<input id="username" placeholder="User Username">
+<input id="password" placeholder="Password">
 
-<hr>
+<button onclick="create()">Create User</button>
 
+</div>
+
+<div class="box">
 <h3>User List</h3>
 <div id="list"></div>
+</div>
 
 <script>
 
-// access check
-if(localStorage.getItem("role") !== "agent"){
-  document.body.innerHTML = "<h2>Access Denied</h2>";
+// login check
+let role = localStorage.getItem("role");
+if(role !== "agent"){
+alert("Access Denied");
+location.href = "index.html";
 }
 
-// load users
-load();
-
-function createUser(){
+// create user
+function create(){
 
 let u = document.getElementById("username").value;
 let p = document.getElementById("password").value;
 
+if(u === "" || p === ""){
+alert("Fill all fields");
+return;
+}
+
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// add user (final level)
 users.push({
-  username: u,
-  password: p,
-  role: "user",
-  createdBy: "agent",
-  status: "pending"
+username: u,
+password: p,
+role: "user",
+createdBy: "agent"
 });
 
 localStorage.setItem("users", JSON.stringify(users));
 
-alert("User Created (Pending)");
+alert("User Created");
 
-load();
+show();
 }
 
-function load(){
+// show list
+function show(){
 
 let users = JSON.parse(localStorage.getItem("users")) || [];
 let box = document.getElementById("list");
@@ -59,14 +104,14 @@ let box = document.getElementById("list");
 box.innerHTML = "";
 
 users.forEach(u=>{
-  if(u.role === "user"){
-    box.innerHTML += `
-      <p>${u.username} - ${u.status}</p>
-    `;
-  }
+if(u.role === "user"){
+box.innerHTML += `<p>👤 ${u.username}</p>`;
+}
 });
 
 }
+
+show();
 
 </script>
 
