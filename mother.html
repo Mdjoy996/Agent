@@ -1,69 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mother Panel</title>
-
-<style>
-body{margin:0;font-family:Arial;background:#0f172a;color:white;}
-.top{background:#020617;padding:15px;display:flex;justify-content:space-between;}
-.main{padding:20px;}
-button{padding:10px;background:#22c55e;border:none;border-radius:6px;cursor:pointer;}
-table{width:100%;margin-top:20px;border-collapse:collapse;}
-td,th{padding:10px;border-bottom:1px solid #1e293b;}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;}
-.box{background:#020617;padding:20px;border-radius:10px;width:300px;}
-input{width:100%;padding:10px;margin-top:10px;}
-</style>
-
+  <title>Mother Panel</title>
 </head>
-
 <body>
 
-<div class="top">
-<b>Mother Panel</b>
-<button onclick="logout()">Logout</button>
-</div>
-
-<div class="main">
-
-<h2>Super Admin Control</h2>
-
-<button onclick="openModal()">➕ Add Super Admin</button>
-
-<p>Total: <span id="count">0</span></p>
-
-<table>
-<tr>
-<th>Name</th>
-<th>User</th>
-<th>Pass</th>
-<th>Action</th>
-</tr>
-
-<tbody id="table"></tbody>
-</table>
-
-</div>
-
-<!-- MODAL -->
-<div id="modal" class="modal">
-<div class="box">
-
-<h3>Create Super Admin</h3>
-
-<input id="name" placeholder="Name">
-<input id="user" placeholder="Username">
-<input id="pass" placeholder="Password">
-
-<button onclick="create()">Create</button>
-<button onclick="closeModal()" style="background:red;color:white;">Cancel</button>
-
-</div>
-</div>
-
-<script>
-<h2>Create User</h2>
+<h2>Mother Panel - Create User</h2>
 
 <input id="newUser" placeholder="Username"><br><br>
 <input id="newPass" placeholder="Password"><br><br>
@@ -74,27 +16,56 @@ input{width:100%;padding:10px;margin-top:10px;}
   <option value="agent">Agent</option>
 </select><br><br>
 
-<button onclick="createUser()">Create</button>
+<button onclick="createUser()">Create User</button>
+
+<hr>
+
+<h3>Created Users</h3>
+<div id="list"></div>
 
 <script>
+
+// load users
+showUsers();
+
 function createUser(){
 
 let u = document.getElementById("newUser").value;
 let p = document.getElementById("newPass").value;
 let r = document.getElementById("role").value;
 
-// পুরাতন user list আনুন
+// get old users
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// নতুন user add
+// add new user
 users.push({username:u, password:p, role:r});
 
-// save
 localStorage.setItem("users", JSON.stringify(users));
 
 alert("User Created!");
+
+showUsers();
 }
+
+// show users
+function showUsers(){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let box = document.getElementById("list");
+
+box.innerHTML = "";
+
+users.forEach((u,i)=>{
+  box.innerHTML += `
+    <p>
+      ${i+1}. ${u.username} (${u.role})
+    </p>
+  `;
+});
+
+}
+
 </script>
-  
+
 </body>
 </html>
