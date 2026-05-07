@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AG Panel</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(#062b06,#4caf00);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:#fff;
+}
+
+.box{
+text-align:center;
+background:rgba(0,0,0,0.4);
+padding:30px;
+border-radius:15px;
+border:1px solid #00ff99;
+}
+
+h1{
+margin-bottom:15px;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#000;
+color:#ffcc00;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#222;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+<h1>AG PANEL</h1>
+<p>Welcome to 10cricket Agent System</p>
+
+<button onclick="goLogin()">Enter Login</button>
+</div>
+
+<script>
+function goLogin(){
+window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
