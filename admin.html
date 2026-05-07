@@ -1,27 +1,403 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin Dashboard</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#ececec;
+}
+
+/* HEADER */
+
+.topbar{
+background:#ffbf00;
+padding:12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.logo{
+font-size:38px;
+font-weight:bold;
+font-style:italic;
+color:#d6ff00;
+text-shadow:2px 2px #000;
+}
+
+.top-right{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.top-box{
+background:#67d9a5;
+padding:10px 14px;
+border-radius:8px;
+font-size:14px;
+font-weight:bold;
+color:#000;
+}
+
+/* MENU */
+
+.menu{
+background:#111;
+display:flex;
+overflow:auto;
+white-space:nowrap;
+}
+
+.menu a{
+color:#fff;
+text-decoration:none;
+padding:16px 18px;
+display:block;
+font-size:15px;
+border-right:1px solid rgba(255,255,255,0.1);
+}
+
+.menu a:hover{
+background:#222;
+}
+
+/* NEWS */
+
+.news{
+background:#42b36f;
+padding:10px;
+font-weight:bold;
+color:#fff;
+}
+
+/* BALANCE */
+
+.balance-wrap{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:2px;
+margin-top:10px;
+}
+
+.balance-card{
+background:#fff;
+padding:18px;
+}
+
+.balance-card h3{
+font-size:16px;
+color:#888;
+margin-bottom:10px;
+}
+
+.balance-card p{
+font-size:22px;
+font-weight:bold;
+}
+
+.red{
+color:red;
+}
+
+/* MAIN */
+
+.main{
+padding:15px;
+}
+
+/* SEARCH */
+
+.search-box{
+background:#fff;
+padding:15px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+align-items:center;
+border-radius:8px 8px 0 0;
+}
+
+.search-box select,
+.search-box input{
+padding:12px;
+border:2px solid #7fb4e5;
+border-radius:6px;
+font-size:15px;
+}
+
+.search-box input{
+flex:1;
+}
+
+.search-btn{
+background:#55c57a;
+padding:12px 18px;
+border:none;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* TABLE */
+
+.table-wrap{
+overflow:auto;
+background:#fff;
+border-radius:0 0 8px 8px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:700px;
+}
+
+th{
+background:#000;
+color:#fff;
+padding:14px;
+text-align:left;
+font-size:15px;
+}
+
+td{
+padding:14px;
+border:1px solid #c8d9ea;
+background:#fff;
+font-size:15px;
+}
+
+.user-tag{
+background:#ff008c;
+color:#fff;
+padding:5px 8px;
+border-radius:6px;
+font-size:12px;
+margin-right:8px;
+}
+
+.active{
+background:#dff4d7;
+color:#4b8f29;
+padding:5px 10px;
+border-radius:5px;
+display:inline-block;
+font-size:13px;
+font-weight:bold;
+}
+
+.action-btn{
+padding:8px 10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:14px;
+margin-right:5px;
+}
+
+.setting{
+background:#eee;
+}
+
+.add{
+background:#67d9a5;
+}
+
+/* FOOTER */
+
+.footer{
+padding:20px;
+text-align:center;
+font-size:13px;
+color:#666;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.logo{
+font-size:28px;
+}
+
+.balance-wrap{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>🧑 Admin Dashboard</h1>
+<!-- HEADER -->
 
-<p>Manage Sub Admin & Agents</p>
+<div class="topbar">
 
-<button onclick="logout()">Logout</button>
+<div class="logo">
+Gamebuzz
+</div>
+
+<div class="top-right">
+<div class="top-box">ADMIN</div>
+<div class="top-box">Main PBU 300</div>
+<div class="top-box">GMT +06:00</div>
+<div class="top-box" onclick="logout()" style="cursor:pointer;">
+Logout
+</div>
+</div>
+
+</div>
+
+<!-- MENU -->
+
+<div class="menu">
+<a href="#">▼ Downline List</a>
+<a href="#">🧾 My Account</a>
+<a href="#">📄 My Reports</a>
+<a href="#">📋 BetList</a>
+<a href="#">📰 News</a>
+</div>
+
+<!-- NEWS -->
+
+<div class="news">
+🔊 Admin News Panel
+</div>
+
+<!-- BALANCE -->
+
+<div class="balance-wrap">
+
+<div class="balance-card">
+<h3>Total Subadmin Balance</h3>
+<p>PBU 120.50</p>
+</div>
+
+<div class="balance-card">
+<h3>Total Client Balance</h3>
+<p>PBU 80.25</p>
+</div>
+
+<div class="balance-card">
+<h3>Exposure</h3>
+<p class="red">PBU (15.75)</p>
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<select>
+<option>All</option>
+<option>Active</option>
+<option>Suspend</option>
+</select>
+
+<input type="text" placeholder="Find member...">
+
+<button class="search-btn">
+Search
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>ACCOUNT(SUBADMIN)</th>
+<th>REMAINING BAL.</th>
+<th>TOTAL BAL.</th>
+<th>STATUS</th>
+<th>ACTION</th>
+</tr>
+
+<tr>
+<td><span class="user-tag">SA</span> Farabi</td>
+<td>50.00</td>
+<td>120.00</td>
+<td><span class="active">● Active</span></td>
+<td>
+<button class="action-btn setting">⚙</button>
+<button class="action-btn add">👤+</button>
+</td>
+</tr>
+
+<tr>
+<td><span class="user-tag">SA</span> Zayan</td>
+<td>0.00</td>
+<td>0.00</td>
+<td><span class="active">● Active</span></td>
+<td>
+<button class="action-btn setting">⚙</button>
+<button class="action-btn add">👤+</button>
+</td>
+</tr>
+
+<tr>
+<td><span class="user-tag">SA</span> Rakib</td>
+<td>100.00</td>
+<td>50.00</td>
+<td><span class="active">● Active</span></td>
+<td>
+<button class="action-btn setting">⚙</button>
+<button class="action-btn add">👤+</button>
+</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+© 2026 Admin Dashboard
+</div>
 
 <script>
+
+/* SECURITY */
+
 let role = localStorage.getItem("role");
 
 if(role !== "admin"){
-  window.location.href = "login.html";
+window.location.href = "login.html";
 }
+
+/* LOGOUT */
 
 function logout(){
 localStorage.removeItem("role");
 window.location.href = "login.html";
 }
+
 </script>
 
 </body>
