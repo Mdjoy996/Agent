@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sub Admin Dashboard</title>
+</head>
+<body>
+
+<h1>🧾 Sub Admin Dashboard</h1>
+
+<p>Manage Super Agents</p>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+let role = localStorage.getItem("role");
+
+if(role !== "subadmin"){
+  window.location.href = "login.html";
+}
+
+function logout(){
+localStorage.removeItem("role");
+window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
