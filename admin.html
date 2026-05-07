@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Dashboard</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>10Cricket Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:'Poppins',sans-serif;
 }
 
 body{
 background:#ececec;
 }
 
-/* HEADER */
+.top-yellow{
+height:10px;
+background:#facc15;
+}
 
 .topbar{
-background:#ffbf00;
-padding:12px;
+background:#222;
+padding:10px 15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -30,373 +33,462 @@ flex-wrap:wrap;
 }
 
 .logo{
-font-size:38px;
-font-weight:bold;
+font-size:40px;
+font-weight:700;
+color:#facc15;
 font-style:italic;
-color:#d6ff00;
-text-shadow:2px 2px #000;
+text-shadow:2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .top-right{
 display:flex;
-gap:10px;
+gap:8px;
 flex-wrap:wrap;
 }
 
 .top-box{
-background:#67d9a5;
-padding:10px 14px;
-border-radius:8px;
-font-size:14px;
-font-weight:bold;
-color:#000;
+background:#16a34a;
+color:white;
+padding:5px 10px;
+border-radius:3px;
+font-size:12px;
+font-weight:600;
 }
 
-/* MENU */
-
-.menu{
-background:#111;
+.navbar{
+background:#2d2d2d;
 display:flex;
-overflow:auto;
-white-space:nowrap;
-}
-
-.menu a{
-color:#fff;
-text-decoration:none;
-padding:16px 18px;
-display:block;
-font-size:15px;
-border-right:1px solid rgba(255,255,255,0.1);
-}
-
-.menu a:hover{
-background:#222;
-}
-
-/* NEWS */
-
-.news{
-background:#42b36f;
-padding:10px;
-font-weight:bold;
-color:#fff;
-}
-
-/* BALANCE */
-
-.balance-wrap{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
+flex-wrap:wrap;
 gap:2px;
-margin-top:10px;
+padding:0;
+border-top:1px solid #444;
 }
 
-.balance-card{
-background:#fff;
-padding:18px;
+.navbar button{
+background:#2d2d2d;
+color:white;
+border:none;
+padding:12px 15px;
+cursor:pointer;
+font-size:13px;
+border-right:1px solid #444;
 }
 
-.balance-card h3{
-font-size:16px;
-color:#888;
-margin-bottom:10px;
+.navbar button:hover{
+background:#16a34a;
 }
 
-.balance-card p{
-font-size:22px;
-font-weight:bold;
+.green-line{
+height:18px;
+background:#34d399;
 }
 
-.red{
-color:red;
+.summary{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+background:#f5f5f5;
+border-top:1px solid #ddd;
+border-bottom:1px solid #ddd;
 }
 
-/* MAIN */
+.summary-box{
+padding:10px;
+border-right:1px solid #ddd;
+}
+
+.summary-box p{
+font-size:11px;
+color:#777;
+margin-bottom:5px;
+}
+
+.summary-box h3{
+font-size:18px;
+font-weight:600;
+color:#111;
+}
 
 .main{
 padding:15px;
 }
 
-/* SEARCH */
-
-.search-box{
-background:#fff;
-padding:15px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-align-items:center;
-border-radius:8px 8px 0 0;
+.panel{
+display:none;
 }
 
-.search-box select,
-.search-box input{
+.active-panel{
+display:block;
+}
+
+.content-box{
+background:white;
+border:1px solid #ddd;
 padding:12px;
-border:2px solid #7fb4e5;
-border-radius:6px;
-font-size:15px;
 }
 
-.search-box input{
-flex:1;
+.top-controls{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+flex-wrap:wrap;
+gap:10px;
 }
 
-.search-btn{
-background:#55c57a;
-padding:12px 18px;
+.left-controls{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+
+.left-controls select,
+.left-controls input{
+padding:8px;
+border:1px solid #bbb;
+font-size:13px;
+}
+
+.green-btn{
+background:#74c476;
+color:white;
 border:none;
-border-radius:6px;
-font-weight:bold;
+padding:8px 15px;
+font-size:13px;
 cursor:pointer;
+border-radius:3px;
 }
 
-/* TABLE */
-
-.table-wrap{
-overflow:auto;
-background:#fff;
-border-radius:0 0 8px 8px;
+.green-btn:hover{
+background:#16a34a;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-min-width:700px;
 }
 
 th{
-background:#000;
-color:#fff;
-padding:14px;
+background:black;
+color:white;
+padding:10px;
+font-size:12px;
 text-align:left;
-font-size:15px;
 }
 
 td{
-padding:14px;
-border:1px solid #c8d9ea;
-background:#fff;
-font-size:15px;
-}
-
-.user-tag{
-background:#ff008c;
-color:#fff;
-padding:5px 8px;
-border-radius:6px;
-font-size:12px;
-margin-right:8px;
-}
-
-.active{
-background:#dff4d7;
-color:#4b8f29;
-padding:5px 10px;
-border-radius:5px;
-display:inline-block;
+padding:10px;
 font-size:13px;
-font-weight:bold;
+border-bottom:1px solid #ddd;
+}
+
+.status{
+background:#22c55e;
+color:white;
+padding:4px 8px;
+border-radius:2px;
+font-size:11px;
 }
 
 .action-btn{
-padding:8px 10px;
+background:#222;
+color:white;
 border:none;
-border-radius:5px;
+padding:5px 10px;
 cursor:pointer;
-font-size:14px;
-margin-right:5px;
+font-size:12px;
+border-radius:2px;
 }
 
-.setting{
-background:#eee;
+.form-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:10px;
 }
 
-.add{
-background:#67d9a5;
+.form-grid input{
+padding:10px;
+border:1px solid #ccc;
 }
 
-/* FOOTER */
-
-.footer{
-padding:20px;
-text-align:center;
-font-size:13px;
-color:#666;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-
+@media(max-width:768px){
 .logo{
 font-size:28px;
 }
 
-.balance-wrap{
-grid-template-columns:1fr;
+.navbar{
+overflow:auto;
+white-space:nowrap;
 }
-
 }
-
 </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
+<div class="top-yellow"></div>
 
 <div class="topbar">
 
-<div class="logo">
-Gamebuzz
-</div>
+  <div class="logo">10CRICKET</div>
 
-<div class="top-right">
-<div class="top-box">ADMIN</div>
-<div class="top-box">Main PBU 300</div>
-<div class="top-box">GMT +06:00</div>
-<div class="top-box" onclick="logout()" style="cursor:pointer;">
-Logout
-</div>
+  <div class="top-right">
+<div class="top-box">MAIN</div>
+<div class="top-box">PBU 550</div>
+<div class="top-box">GMT+06:00</div>
+<div class="top-box">Logout</div>
 </div>
 
 </div>
 
-<!-- MENU -->
-
-<div class="menu">
-<a href="#">▼ Downline List</a>
-<a href="#">🧾 My Account</a>
-<a href="#">📄 My Reports</a>
-<a href="#">📋 BetList</a>
-<a href="#">📰 News</a>
-</div>
-
-<!-- NEWS -->
-
-<div class="news">
-🔊 Admin News Panel
-</div>
-
-<!-- BALANCE -->
-
-<div class="balance-wrap">
-
-<div class="balance-card">
-<h3>Total Subadmin Balance</h3>
-<p>PBU 120.50</p>
-</div>
-
-<div class="balance-card">
-<h3>Total Client Balance</h3>
-<p>PBU 80.25</p>
-</div>
-
-<div class="balance-card">
-<h3>Exposure</h3>
-<p class="red">PBU (15.75)</p>
-</div>
+<div class="green-line"></div>
 
 </div>
 
-<!-- MAIN -->
+<div class="navbar">
+
+  <button onclick="showPanel('dashboard')">Dashboard</button>
+  <button onclick="showPanel('admins')">Admins</button>
+  <button onclick="showPanel('reports')">Reports</button>
+  <button onclick="showPanel('matches')">Matches</button>
+  <button onclick="showPanel('banking')">Banking</button>
+  <button onclick="logout()">Logout</button>
+
+</div>
 
 <div class="main">
 
-<!-- SEARCH -->
+  <div class="summary">
 
-<div class="search-box">
-
-<select>
-<option>All</option>
-<option>Active</option>
-<option>Suspend</option>
-</select>
-
-<input type="text" placeholder="Find member...">
-
-<button class="search-btn">
-Search
-</button>
-
+<div class="summary-box">
+<p>Total Agent Balance</p>
+<h3>PBU 196.98</h3>
 </div>
 
-<!-- TABLE -->
+<div class="summary-box">
+<p>Total Client Balance</p>
+<h3>PBU 170.86</h3>
+</div>
 
-<div class="table-wrap">
+<div class="summary-box">
+<p>Exposure</p>
+<h3>PBU (22.93)</h3>
+</div>
 
-<table>
+<div class="summary-box">
+<p>Available Balance</p>
+<h3>PBU 917.84</h3>
+</div>
 
-<tr>
-<th>ACCOUNT(SUBADMIN)</th>
-<th>REMAINING BAL.</th>
-<th>TOTAL BAL.</th>
-<th>STATUS</th>
-<th>ACTION</th>
-</tr>
-
-<tr>
-<td><span class="user-tag">SA</span> Farabi</td>
-<td>50.00</td>
-<td>120.00</td>
-<td><span class="active">● Active</span></td>
-<td>
-<button class="action-btn setting">⚙</button>
-<button class="action-btn add">👤+</button>
-</td>
-</tr>
-
-<tr>
-<td><span class="user-tag">SA</span> Zayan</td>
-<td>0.00</td>
-<td>0.00</td>
-<td><span class="active">● Active</span></td>
-<td>
-<button class="action-btn setting">⚙</button>
-<button class="action-btn add">👤+</button>
-</td>
-</tr>
-
-<tr>
-<td><span class="user-tag">SA</span> Rakib</td>
-<td>100.00</td>
-<td>50.00</td>
-<td><span class="active">● Active</span></td>
-<td>
-<button class="action-btn setting">⚙</button>
-<button class="action-btn add">👤+</button>
-</td>
-</tr>
-
-</table>
-
+<div class="summary-box">
+<p>Transferable P/L</p>
+<h3>PBU 58.38</h3>
 </div>
 
 </div>
 
-<!-- FOOTER -->
+<!-- DASHBOARD -->
 
-<div class="footer">
-© 2026 Admin Dashboard
+  <div id="dashboard" class="panel active-panel">
+
+    <div class="section">
+
+      <div class="section-top">
+
+        <div class="inputs">
+          <select>
+            <option>All</option>
+            <option>Active</option>
+            <option>Inactive</option>
+          </select>
+
+          <input type="text" placeholder="Find member...">
+
+          <button class="green-btn">Search</button>
+        </div>
+
+        <button class="green-btn" onclick="showPanel('admins')">
+          + Add Admin
+        </button>
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>ACCOUNT</th>
+              <th>REMAINING BAL</th>
+              <th>TOTAL BAL</th>
+              <th>STATUS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+
+          <tbody id="adminTable">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ADMIN CREATE -->
+
+  <div id="admins" class="panel">
+
+    <div class="section">
+
+      <h2 style="margin-bottom:20px;">Create Admin</h2>
+
+      <div class="inputs">
+
+        <input type="text" id="adminName" placeholder="Admin Username">
+
+        <input type="password" id="adminPass" placeholder="Password">
+
+        <input type="number" id="adminBalance" placeholder="Balance">
+
+        <button class="green-btn" onclick="addAdmin()">
+          Create Admin
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- REPORTS -->
+
+  <div id="reports" class="panel">
+
+    <div class="section">
+      <h2>Reports</h2>
+      <p style="margin-top:10px;">Daily reports and activity logs will show here.</p>
+    </div>
+
+  </div>
+
+  <!-- MATCHES -->
+
+  <div id="matches" class="panel">
+
+    <div class="section">
+      <h2>Live Matches</h2>
+      <p style="margin-top:10px;">RCB vs CSK</p>
+      <p>MI vs KKR</p>
+    </div>
+
+  </div>
+
+  <!-- BANKING -->
+
+  <div id="banking" class="panel">
+
+    <div class="section">
+      <h2>Banking</h2>
+      <p style="margin-top:10px;">Deposit / Withdraw controls.</p>
+    </div>
+
+  </div>
+
 </div>
 
 <script>
 
-/* SECURITY */
+let admins = JSON.parse(localStorage.getItem('admins')) || [];
 
-let role = localStorage.getItem("role");
+function showPanel(panelId){
 
-if(role !== "admin"){
-window.location.href = "login.html";
+  document.querySelectorAll('.panel').forEach(panel=>{
+    panel.classList.remove('active-panel');
+  });
+
+  document.getElementById(panelId).classList.add('active-panel');
+
 }
 
-/* LOGOUT */
+function addAdmin(){
+
+  let name = document.getElementById('adminName').value;
+  let pass = document.getElementById('adminPass').value;
+  let balance = document.getElementById('adminBalance').value;
+
+  if(name === '' || pass === '' || balance === ''){
+    alert('Fill all fields');
+    return;
+  }
+
+  admins.push({
+    name,
+    pass,
+    balance
+  });
+
+  localStorage.setItem('admins', JSON.stringify(admins));
+
+  updateTable();
+
+  document.getElementById('adminName').value='';
+  document.getElementById('adminPass').value='';
+  document.getElementById('adminBalance').value='';
+
+  alert('Admin Created Successfully');
+
+  showPanel('dashboard');
+
+}
+
+function updateTable(){
+
+  let table = document.getElementById('adminTable');
+
+  table.innerHTML='';
+
+  admins.forEach((admin,index)=>{
+
+    table.innerHTML += `
+
+      <tr>
+        <td>${admin.name}</td>
+        <td>${admin.balance}</td>
+        <td>${admin.balance}</td>
+        <td><span class="status">Active</span></td>
+        <td>
+          <button class="action-btn" onclick="deleteAdmin(${index})">
+            Delete
+          </button>
+        </td>
+      </tr>
+
+    `;
+
+  });
+
+}
+
+function deleteAdmin(index){
+
+  admins.splice(index,1);
+
+  localStorage.setItem('admins', JSON.stringify(admins));
+
+  updateTable();
+
+}
 
 function logout(){
-localStorage.removeItem("role");
-window.location.href = "login.html";
+
+  alert('Logged Out');
+
 }
+
+updateTable();
 
 </script>
 
