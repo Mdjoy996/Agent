@@ -1,27 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Super Admin Dashboard</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b0b0b;
+color:#fff;
+}
+
+header{
+background:linear-gradient(90deg,#003300,#00aa00);
+padding:15px;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+}
+
+.container{
+padding:15px;
+}
+
+.card{
+background:#1a1a1a;
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+border:1px solid #00ff99;
+}
+
+button{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.logout{
+background:red;
+color:#fff;
+width:100%;
+margin-top:15px;
+}
+.create{
+background:#00cc66;
+color:#000;
+margin-top:10px;
+}
+</style>
+
 </head>
+
 <body>
 
-<h1>👑 Super Admin Dashboard</h1>
+<header>
+👑 Super Admin Dashboard
+</header>
 
-<p>Full Control Panel</p>
+<div class="container">
 
-<button onclick="logout()">Logout</button>
+<div class="card">
+<h3>🧑 Create Admin</h3>
+<input id="adminName" placeholder="Username"><br><br>
+<input id="adminPass" placeholder="Password"><br>
+<button class="create" onclick="createAdmin()">Create Admin</button>
+</div>
+
+<div class="card">
+<h3>📊 System Info</h3>
+<p>Role: Super Admin</p>
+<p>Status: Active</p>
+</div>
+
+<button class="logout" onclick="logout()">Logout</button>
+
+</div>
 
 <script>
+
+// 🔐 security
 let role = localStorage.getItem("role");
 
 if(role !== "superadmin"){
-  window.location.href = "login.html";
+window.location.href = "login.html";
 }
 
+// 🧑 create admin (demo storage)
+function createAdmin(){
+
+let admins = JSON.parse(localStorage.getItem("admins") || "[]");
+
+admins.push({
+username: document.getElementById("adminName").value,
+password: document.getElementById("adminPass").value,
+role: "admin"
+});
+
+localStorage.setItem("admins", JSON.stringify(admins));
+
+alert("Admin Created ✅");
+}
+
+// 🚪 logout
 function logout(){
 localStorage.removeItem("role");
 window.location.href = "login.html";
 }
+
 </script>
 
 </body>
