@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Super Agent Dashboard</title>
+</head>
+<body>
+
+<h1>🧑‍💼 Super Agent Dashboard</h1>
+
+<p>Manage Agents</p>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+let role = localStorage.getItem("role");
+
+if(role !== "superagent"){
+  window.location.href = "login.html";
+}
+
+function logout(){
+localStorage.removeItem("role");
+window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
