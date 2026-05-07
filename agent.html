@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Agent Dashboard</title>
+</head>
+<body>
+
+<h1>👤 Agent Dashboard</h1>
+
+<p>Create Users (future system)</p>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+let role = localStorage.getItem("role");
+
+if(role !== "agent"){
+  window.location.href = "login.html";
+}
+
+function logout(){
+localStorage.removeItem("role");
+window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
