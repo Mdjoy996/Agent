@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AG Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#0f172a;
+      color:white;
+    }
+
+    /* LOGIN PAGE */
+
+    #loginPage{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .login-box{
+      width:320px;
+      background:#1e293b;
+      padding:30px;
+      border-radius:14px;
+      box-shadow:0 0 25px rgba(0,0,0,0.4);
+    }
+
+    .login-box input{
+      width:100%;
+      padding:12px;
+      margin-top:14px;
+      border:none;
+      outline:none;
+      border-radius:8px;
+      background:#334155;
+      color:white;
+    }
+
+    .login-box button{
+      width:100%;
+      padding:12px;
+      margin-top:18px;
+      border:none;
+      border-radius:8px;
+      background:#22c55e;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      font-size:15px;
+    }
+
+    #status{
+      text-align:center;
+      margin-top:12px;
+      color:#cbd5e1;
+      font-size:14px;
+    }
+
+    /* DASHBOARD */
+
+    #dashboard{
+      display:none;
+    }
+
+    .sidebar{
+      position:fixed;
+      width:230px;
+      height:100vh;
+      background:#111827;
+      padding-top:20px;
+    }
+
+    .logo{
+      text-align:center;
+      font-size:22px;
+      font-weight:600;
+      margin-bottom:30px;
+      color:#22c55e;
+    }
+
+    .menu{
+      padding:0 15px;
+    }
+
+    .menu button{
+      width:100%;
+      padding:13px;
+      margin-bottom:12px;
+      border:none;
+      border-radius:10px;
+      background:#1e293b;
+      color:white;
+      cursor:pointer;
+      text-align:left;
+      font-size:15px;
+    }
+
+    .menu button:hover{
+      background:#22c55e;
+    }
+
+    .main{
+      margin-left:230px;
+      padding:20px;
+    }
+
+    .topbar{
+      background:#1e293b;
+      padding:18px;
+      border-radius:12px;
+      margin-bottom:20px;
+      font-size:18px;
+      font-weight:500;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:#1e293b;
+      padding:25px;
+      border-radius:14px;
+    }
+
+    .card h2{
+      font-size:30px;
+      margin-top:10px;
+      color:#22c55e;
+    }
+
+    .card p{
+      color:#cbd5e1;
+      font-size:14px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+  <div class="login-box">
+
+    <input type="text" id="username" placeholder="Username">
+
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <p id="status"></p>
+
+  </div>
+
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+  <div class="sidebar">
+
+    <div class="logo">
+      AG PANEL
+    </div>
+
+    <div class="menu">
+      <button>🏠 Dashboard</button>
+      <button>👤 Users</button>
+      <button>🏏 Matches</button>
+      <button>💰 Balance</button>
+      <button>⚙ Settings</button>
+      <button onclick="logout()">🚪 Logout</button>
+    </div>
+
+  </div>
+
+  <div class="main">
+
+    <div class="topbar">
+      Welcome Back, Admin 👋
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <p>Total Users</p>
+        <h2>120</h2>
+      </div>
+
+      <div class="card">
+        <p>Live Matches</p>
+        <h2>08</h2>
+      </div>
+
+      <div class="card">
+        <p>Total Balance</p>
+        <h2>$12K</h2>
+      </div>
+
+      <div class="card">
+        <p>Online Users</p>
+        <h2>54</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+function login(){
+
+  let user = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
+
+  if(user === "admin" && pass === "1234"){
+
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+
+  }else{
+
+    document.getElementById("status").innerText = "Wrong Username or Password";
+
+  }
+
+}
+
+function logout(){
+
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("loginPage").style.display = "flex";
+
+}
+
+</script>
+
+</body>
+</html>
