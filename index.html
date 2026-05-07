@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AG Panel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -20,7 +21,7 @@
       color:white;
     }
 
-    /* LOGIN PAGE */
+    /* LOGIN */
 
     #loginPage{
       height:100vh;
@@ -127,7 +128,7 @@
 
     .cards{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
       gap:20px;
     }
 
@@ -146,6 +147,62 @@
     .card p{
       color:#cbd5e1;
       font-size:14px;
+    }
+
+    .card input{
+      width:100%;
+      padding:10px;
+      margin-top:12px;
+      border:none;
+      border-radius:8px;
+      background:#334155;
+      color:white;
+    }
+
+    .card button{
+      width:100%;
+      padding:10px;
+      margin-top:12px;
+      border:none;
+      border-radius:8px;
+      background:#22c55e;
+      color:white;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    table{
+      width:100%;
+      margin-top:15px;
+      border-collapse:collapse;
+    }
+
+    table th, table td{
+      padding:12px;
+      border-bottom:1px solid #334155;
+      text-align:left;
+    }
+
+    table th{
+      color:#22c55e;
+    }
+
+    @media(max-width:768px){
+
+      .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+      }
+
+      .main{
+        margin-left:0;
+      }
+
+      .cards{
+        grid-template-columns:1fr;
+      }
+
     }
 
   </style>
@@ -195,14 +252,16 @@
   <div class="main">
 
     <div class="topbar">
-      Welcome Back, Admin 👋
+      Welcome Back 👋
     </div>
 
     <div class="cards">
 
+      <!-- STATS -->
+
       <div class="card">
         <p>Total Users</p>
-        <h2>120</h2>
+        <h2 id="totalUsers">0</h2>
       </div>
 
       <div class="card">
@@ -220,6 +279,43 @@
         <h2>54</h2>
       </div>
 
+      <!-- ADD USER -->
+
+      <div class="card">
+
+        <p>Add New User</p>
+
+        <input type="text" id="newUser" placeholder="Username">
+
+        <input type="password" id="newPass" placeholder="Password">
+
+        <button onclick="addUser()">Add User</button>
+
+      </div>
+
+      <!-- USER TABLE -->
+
+      <div class="card">
+
+        <p>User List</p>
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Password</th>
+            </tr>
+          </thead>
+
+          <tbody id="userTable">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
     </div>
 
   </div>
@@ -228,30 +324,83 @@
 
 <script>
 
-function login(){
+  // DEMO LOGIN
 
-  let user = document.getElementById("username").value;
-  let pass = document.getElementById("password").value;
+  function login(){
 
-  if(user === "admin" && pass === "1234"){
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
 
-    document.getElementById("loginPage").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
+    if(user === "admin" && pass === "1234"){
 
-  }else{
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
 
-    document.getElementById("status").innerText = "Wrong Username or Password";
+    }else{
+
+      document.getElementById("status").innerText = "Wrong Username or Password";
+
+    }
 
   }
 
-}
+  // LOGOUT
 
-function logout(){
+  function logout(){
 
-  document.getElementById("dashboard").style.display = "none";
-  document.getElementById("loginPage").style.display = "flex";
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("loginPage").style.display = "flex";
 
-}
+  }
+
+  // USER SYSTEM
+
+  let users = [];
+
+  function addUser(){
+
+    let username = document.getElementById("newUser").value;
+    let password = document.getElementById("newPass").value;
+
+    if(username === "" || password === ""){
+      alert("Fill all fields");
+      return;
+    }
+
+    users.push({
+      username:username,
+      password:password
+    });
+
+    updateTable();
+
+    document.getElementById("newUser").value = "";
+    document.getElementById("newPass").value = "";
+
+    alert("User Added Successfully ✅");
+
+  }
+
+  function updateTable(){
+
+    let table = document.getElementById("userTable");
+
+    table.innerHTML = "";
+
+    users.forEach((user)=>{
+
+      table.innerHTML += `
+        <tr>
+          <td>${user.username}</td>
+          <td>${user.password}</td>
+        </tr>
+      `;
+
+    });
+
+    document.getElementById("totalUsers").innerText = users.length;
+
+  }
 
 </script>
 
