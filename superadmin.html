@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Super Admin Dashboard</title>
+</head>
+<body>
+
+<h1>👑 Super Admin Dashboard</h1>
+
+<p>Full Control Panel</p>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+let role = localStorage.getItem("role");
+
+if(role !== "superadmin"){
+  window.location.href = "login.html";
+}
+
+function logout(){
+localStorage.removeItem("role");
+window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
