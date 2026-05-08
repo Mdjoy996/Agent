@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400">
+
+<title>10Cricket Super Admin</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#e9f5ea;
+min-width:1400px;
+overflow-x:auto;
+}
+
+/* TOPBAR */
+
+.topbar{
+background:#0f7b32;
+color:#fff;
+padding:14px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-weight:bold;
+}
+
+.logo{
+font-size:34px;
+font-style:italic;
+color:#d7ff5d;
+text-shadow:1px 1px 2px #000;
+}
+
+.top-right{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.top-btn{
+background:#063d17;
+color:#fff;
+padding:8px 14px;
+border-radius:5px;
+font-size:14px;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:#04280f;
+color:white;
+display:flex;
+padding:12px 20px;
+gap:15px;
+font-size:14px;
+overflow-x:auto;
+border-bottom:3px solid #1fc75f;
+}
+
+.nav-item{
+background:#063d17;
+padding:10px 16px;
+border-radius:6px;
+cursor:pointer;
+transition:0.3s;
+white-space:nowrap;
+font-weight:bold;
+border:1px solid transparent;
+}
+
+.nav-item:hover{
+background:#1fc75f;
+color:#fff;
+transform:translateY(-2px);
+}
+
+.active{
+background:#1fc75f;
+color:white;
+border:1px solid #8fffaa;
+}
+
+/* GREEN BAR */
+
+.green-bar{
+background:#1fc75f;
+height:35px;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:1px;
+background:#c9dccc;
+margin-top:10px;
+}
+
+.stat-box{
+background:white;
+padding:18px;
+}
+
+.stat-title{
+font-size:14px;
+color:gray;
+margin-bottom:10px;
+}
+
+.stat-value{
+font-size:30px;
+font-weight:bold;
+}
+
+.red{
+color:red;
+}
+
+.green{
+color:#0f8c2c;
+}
+
+/* MAIN */
+
+.container{
+background:white;
+margin:20px;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+/* TOOLBAR */
+
+.toolbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.left-tools{
+display:flex;
+gap:10px;
+}
+
+select,
+input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:4px;
+width:220px;
+}
+
+button{
+padding:10px 16px;
+border:none;
+border-radius:4px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.search-btn{
+background:#1ea84b;
+color:white;
+}
+
+.admin-btn{
+background:#0f7b32;
+color:white;
+}
+
+/* TABLE */
+
+.table-wrapper{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:1300px;
+}
+
+table th{
+background:#063d17;
+color:white;
+padding:14px;
+text-align:left;
+font-size:14px;
+}
+
+table td{
+padding:14px;
+border-bottom:1px solid #ddd;
+font-size:14px;
+background:white;
+}
+
+.status-active{
+background:#1db954;
+color:white;
+padding:5px 10px;
+border-radius:5px;
+display:inline-block;
+}
+
+.action-btn{
+background:#063d17;
+color:white;
+margin-right:5px;
+padding:6px 10px;
+border-radius:4px;
+display:inline-block;
+cursor:pointer;
+}
+
+.empty{
+text-align:center;
+padding:40px;
+color:gray;
+font-size:16px;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+height:10px;
+width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#0f7b32;
+border-radius:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#d9d9d9;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="logo">
+10Cricket
+</div>
+
+<div class="top-right">
+
+<div class="top-btn">
+SUA Admin
+</div>
+
+<div class="top-btn">
+Main PBU 0.00
+</div>
+
+<div class="top-btn">
+GMT+06:00
+</div>
+
+<div class="top-btn" onclick="logout()">
+Logout
+</div>
+
+</div>
+
+</div>
+
+<!-- FULL NAVBAR -->
+
+<div class="navbar">
+
+<div class="nav-item active"
+onclick="openPage('superadmin.html')">
+🏠 Dashboard
+</div>
+
+<div class="nav-item"
+onclick="openPage('downline.html')">
+👥 Downline List
+</div>
+
+<div class="nav-item"
+onclick="openPage('account.html')">
+💼 My Account
+</div>
+
+<div class="nav-item"
+onclick="openPage('reports.html')">
+📊 My Reports
+</div>
+
+<div class="nav-item"
+onclick="openPage('betlist.html')">
+🎲 Bet List
+</div>
+
+<div class="nav-item"
+onclick="openPage('betlive.html')">
+📡 BetList Live
+</div>
+
+<div class="nav-item"
+onclick="openPage('risk.html')">
+⚠️ Risk Management
+</div>
+
+<div class="nav-item"
+onclick="openPage('banking.html')">
+🏦 Agent Banking
+</div>
+
+<div class="nav-item"
+onclick="openPage('settings.html')">
+⚙️ Settings
+</div>
+
+</div>
+
+<div class="green-bar"></div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat-box">
+<div class="stat-title">
+Total Agent Balance
+</div>
+<div class="stat-value">
+PBU 0.00
+</div>
+</div>
+
+<div class="stat-box">
+<div class="stat-title">
+Total Client Balance
+</div>
+<div class="stat-value">
+PBU 0.00
+</div>
+</div>
+
+<div class="stat-box">
+<div class="stat-title">
+Exposure
+</div>
+<div class="stat-value red">
+PBU (0.00)
+</div>
+</div>
+
+<div class="stat-box">
+<div class="stat-title">
+Available Balance
+</div>
+<div class="stat-value">
+PBU 0.00
+</div>
+</div>
+
+<div class="stat-box">
+<div class="stat-title">
+Transferable Sports P/L
+</div>
+<div class="stat-value green">
+PBU 0.00
+</div>
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="container">
+
+<div class="toolbar">
+
+<div class="left-tools">
+
+<select>
+<option>All</option>
+<option>Active</option>
+<option>Suspend</option>
+</select>
+
+<input type="text"
+placeholder="Find member...">
+
+<button class="search-btn">
+Search
+</button>
+
+</div>
+
+<button class="admin-btn"
+onclick="addAdmin()">
++ Add Admin
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>ACCOUNT(AGENTS)</th>
+<th>REMAINING BAL</th>
+<th>TOTAL AGENT BAL</th>
+<th>TOTAL CLIENT BAL</th>
+<th>AVAILABLE BAL</th>
+<th>EXPOSURE</th>
+<th>CUMULATIVE P/L</th>
+<th>STATUS</th>
+<th>ACTION</th>
+</tr>
+
+</thead>
+
+<tbody id="adminTable">
+
+<tr>
+<td colspan="9" class="empty">
+No Admin Created
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+/* PAGE REDIRECT */
+
+function openPage(page){
+
+location.href = page;
+
+}
+
+/* ADD ADMIN */
+
+function addAdmin(){
+
+let name = prompt("Enter Admin Name");
+
+if(name){
+
+let table = document.getElementById("adminTable");
+
+if(table.innerHTML.includes("No Admin Created")){
+table.innerHTML = "";
+}
+
+table.innerHTML += `
+<tr>
+<td>${name}</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td class="red">(0.00)</td>
+<td class="green">0.00</td>
+<td>
+<span class="status-active">
+Active
+</span>
+</td>
+<td>
+<span class="action-btn">
+Edit
+</span>
+
+<span class="action-btn">
+View
+</span>
+</td>
+</tr>
+`;
+
+}
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+localStorage.clear();
+
+location.href="index.html";
+
+}
+
+/* ACTIVE MENU */
+
+const currentPage = window.location.pathname.split("/").pop();
+
+document.querySelectorAll(".nav-item").forEach(item=>{
+
+const onclick = item.getAttribute("onclick");
+
+if(onclick && onclick.includes(currentPage)){
+item.classList.add("active");
+}
+
+});
+
+</script>
+
+</body>
+</html>
