@@ -14,20 +14,22 @@
 }
 
 .topbar {
-  background: #f5b400;
-  color: #fff;
-  padding: 14px 20px;
+  background: #f4b400;
+  color: white;
+  padding: 10px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
+  border-bottom: 2px solid #222;
 }
 
 .logo {
-  font-size: 34px;
+  font-size: 42px;
   font-style: italic;
-  color: #fff35f;
-  text-shadow: 1px 1px 2px #000;
+  font-weight: bold;
+  color: #fff36d;
+  text-shadow: 2px 2px 2px #000;
+  letter-spacing: 1px;
 }
 
 .top-right {
@@ -45,13 +47,14 @@
 }
 
 .navbar {
-  background: #111;
-  color: white;
+  background: #1b1b1b;
+  color: #fff;
   display: flex;
-  flex-wrap: wrap;
-  padding: 12px;
-  gap: 20px;
-  font-size: 15px;
+  align-items: center;
+  gap: 25px;
+  padding: 12px 15px;
+  font-size: 14px;
+  border-bottom: 1px solid #333;
 }
 
 .navbar div {
@@ -59,21 +62,24 @@
 }
 
 .green-bar {
-  background: #3db36b;
-  height: 35px;
+  background: linear-gradient(to right, #2ea35d, #43c978);
+  height: 34px;
+  border-bottom: 1px solid #bdbdbd;
 }
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1px;
-  background: #d9d9d9;
-  margin-top: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  background: #efefef;
+  border-top: 1px solid #d5d5d5;
+  border-bottom: 1px solid #d5d5d5;
 }
 
 .stat-box {
-  background: white;
+  background: #f8f8f8;
   padding: 16px;
+  border-right: 1px solid #ddd;
+  min-height: 90px;
 }
 
 .stat-title {
@@ -96,11 +102,11 @@
 }
 
 .container {
-  background: white;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background: #f5f5f5;
+  margin: 20px 15px;
+  padding: 18px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .toolbar {
@@ -147,11 +153,12 @@ table {
 }
 
 table th {
-  background: black;
+  background: #000;
   color: white;
-  padding: 12px;
+  padding: 14px 10px;
   text-align: left;
-  font-size: 14px;
+  font-size: 13px;
+  border-right: 1px solid #333;
 }
 
 table td {
