@@ -3,8 +3,6 @@
 <head>
 
 <meta charset="UTF-8">
-
-<!-- DESKTOP STYLE VIEW -->
 <meta name="viewport" content="width=1400">
 
 <title>10Cricket Super Admin</title>
@@ -64,20 +62,36 @@ background:#04280f;
 color:white;
 display:flex;
 padding:12px 20px;
-gap:30px;
-font-size:15px;
+gap:15px;
+font-size:14px;
+overflow-x:auto;
+border-bottom:3px solid #1fc75f;
 }
 
-.navbar div{
+.nav-item{
+background:#063d17;
+padding:10px 16px;
+border-radius:6px;
 cursor:pointer;
+transition:0.3s;
 white-space:nowrap;
+font-weight:bold;
+border:1px solid transparent;
 }
 
-.navbar div:hover{
-color:#8fffaa;
+.nav-item:hover{
+background:#1fc75f;
+color:#fff;
+transform:translateY(-2px);
 }
 
-/* GREEN LINE */
+.active{
+background:#1fc75f;
+color:white;
+border:1px solid #8fffaa;
+}
+
+/* GREEN BAR */
 
 .green-bar{
 background:#1fc75f;
@@ -271,17 +285,54 @@ Logout
 
 </div>
 
-<!-- NAVBAR -->
+<!-- FULL NAVBAR -->
 
 <div class="navbar">
 
-<div>Downline List</div>
-<div>My Account</div>
-<div>My Reports</div>
-<div>Bet List</div>
-<div>BetList Live</div>
-<div>Risk Management</div>
-<div>Agent Banking</div>
+<div class="nav-item active"
+onclick="openPage('superadmin.html')">
+🏠 Dashboard
+</div>
+
+<div class="nav-item"
+onclick="openPage('downline.html')">
+👥 Downline List
+</div>
+
+<div class="nav-item"
+onclick="openPage('account.html')">
+💼 My Account
+</div>
+
+<div class="nav-item"
+onclick="openPage('reports.html')">
+📊 My Reports
+</div>
+
+<div class="nav-item"
+onclick="openPage('betlist.html')">
+🎲 Bet List
+</div>
+
+<div class="nav-item"
+onclick="openPage('betlive.html')">
+📡 BetList Live
+</div>
+
+<div class="nav-item"
+onclick="openPage('risk.html')">
+⚠️ Risk Management
+</div>
+
+<div class="nav-item"
+onclick="openPage('banking.html')">
+🏦 Agent Banking
+</div>
+
+<div class="nav-item"
+onclick="openPage('settings.html')">
+⚙️ Settings
+</div>
 
 </div>
 
@@ -408,6 +459,16 @@ No Admin Created
 
 <script>
 
+/* PAGE REDIRECT */
+
+function openPage(page){
+
+location.href = page;
+
+}
+
+/* ADD ADMIN */
+
 function addAdmin(){
 
 let name = prompt("Enter Admin Name");
@@ -450,6 +511,8 @@ View
 
 }
 
+/* LOGOUT */
+
 function logout(){
 
 localStorage.clear();
@@ -457,6 +520,20 @@ localStorage.clear();
 location.href="index.html";
 
 }
+
+/* ACTIVE MENU */
+
+const currentPage = window.location.pathname.split("/").pop();
+
+document.querySelectorAll(".nav-item").forEach(item=>{
+
+const onclick = item.getAttribute("onclick");
+
+if(onclick && onclick.includes(currentPage)){
+item.classList.add("active");
+}
+
+});
 
 </script>
 
