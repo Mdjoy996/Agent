@@ -57,10 +57,10 @@ font-weight:bold;
 border:1px solid rgba(255,255,255,0.1);
 }
 
+/* LOGOUT */
 .logout-btn{
 background:#c62828;
 cursor:pointer;
-transition:0.3s;
 }
 
 .logout-btn:hover{
@@ -87,13 +87,12 @@ font-size:14px;
 font-weight:bold;
 white-space:nowrap;
 cursor:pointer;
-transition:0.3s;
+transition:0.2s;
 border:1px solid transparent;
 }
 
 .nav-item:hover{
 background:#1fc75f;
-transform:translateY(-2px);
 }
 
 .active{
@@ -120,11 +119,11 @@ background:white;
 padding:20px;
 border-radius:10px;
 box-shadow:0 3px 10px rgba(0,0,0,0.08);
-transition:0.3s;
+transition:0.2s;
 }
 
 .stat-box:hover{
-transform:translateY(-4px);
+transform:translateY(-3px);
 }
 
 .stat-title{
@@ -138,13 +137,8 @@ font-size:28px;
 font-weight:bold;
 }
 
-.red{
-color:#d32f2f;
-}
-
-.green{
-color:#0f8c2c;
-}
+.red{ color:#d32f2f; }
+.green{ color:#0f8c2c; }
 
 /* MAIN */
 
@@ -173,8 +167,7 @@ gap:10px;
 flex-wrap:wrap;
 }
 
-select,
-input{
+select, input{
 padding:11px;
 border:1px solid #ccc;
 border-radius:5px;
@@ -188,7 +181,7 @@ border:none;
 border-radius:5px;
 font-weight:bold;
 cursor:pointer;
-transition:0.3s;
+transition:0.2s;
 }
 
 .search-btn{
@@ -196,17 +189,9 @@ background:#1ea84b;
 color:white;
 }
 
-.search-btn:hover{
-background:#17913f;
-}
-
 .admin-btn{
 background:#0f7b32;
 color:white;
-}
-
-.admin-btn:hover{
-background:#0b6328;
 }
 
 /* TABLE */
@@ -256,20 +241,11 @@ padding:7px 10px;
 border-radius:4px;
 margin-right:5px;
 cursor:pointer;
-display:inline-block;
 font-size:13px;
-}
-
-.action-btn:hover{
-background:#1fc75f;
 }
 
 .delete-btn{
 background:#c62828;
-}
-
-.delete-btn:hover{
-background:#e53935;
 }
 
 .empty{
@@ -329,46 +305,17 @@ color:white;
 /* RESPONSIVE */
 
 @media(max-width:768px){
-
-.logo{
-font-size:26px;
-}
-
-.stat-value{
-font-size:22px;
-}
+.logo{ font-size:26px; }
 
 .container{
 margin:10px;
 padding:15px;
 }
 
-select,
-input{
+select, input{
 width:100%;
 min-width:100%;
 }
-
-.left-tools{
-width:100%;
-}
-
-}
-
-/* SCROLLBAR */
-
-::-webkit-scrollbar{
-height:10px;
-width:10px;
-}
-
-::-webkit-scrollbar-thumb{
-background:#0f7b32;
-border-radius:10px;
-}
-
-::-webkit-scrollbar-track{
-background:#ddd;
 }
 
 </style>
@@ -376,14 +323,10 @@ background:#ddd;
 
 <body>
 
-<!-- TOPBAR -->
-
 <div class="topbar">
-
 <div class="logo">10Cricket</div>
 
 <div class="top-right">
-
 <div class="top-btn">SUA Admin</div>
 <div class="top-btn">Main PBU 0.00</div>
 <div class="top-btn" id="liveClock">GMT+06:00</div>
@@ -393,13 +336,9 @@ Logout
 </div>
 
 </div>
-
 </div>
 
-<!-- NAVBAR -->
-
 <div class="navbar">
-
 <div class="nav-item active">🏠 Dashboard</div>
 <div class="nav-item">👥 Downline List</div>
 <div class="nav-item">💼 My Account</div>
@@ -409,287 +348,83 @@ Logout
 <div class="nav-item">⚠️ Risk Management</div>
 <div class="nav-item">🏦 Agent Banking</div>
 <div class="nav-item">⚙️ Settings</div>
-
 </div>
 
 <div class="green-bar"></div>
 
-<!-- STATS -->
-
 <div class="stats">
-
-<div class="stat-box">
-<div class="stat-title">Total Agent Balance</div>
-<div class="stat-value">PBU 0.00</div>
+<div class="stat-box"><div class="stat-title">Total Agent Balance</div><div class="stat-value">PBU 0.00</div></div>
+<div class="stat-box"><div class="stat-title">Total Client Balance</div><div class="stat-value">PBU 0.00</div></div>
+<div class="stat-box"><div class="stat-title">Exposure</div><div class="stat-value red">PBU (0.00)</div></div>
+<div class="stat-box"><div class="stat-title">Available Balance</div><div class="stat-value">PBU 0.00</div></div>
+<div class="stat-box"><div class="stat-title">Transferable P/L</div><div class="stat-value green">PBU 0.00</div></div>
 </div>
-
-<div class="stat-box">
-<div class="stat-title">Total Client Balance</div>
-<div class="stat-value">PBU 0.00</div>
-</div>
-
-<div class="stat-box">
-<div class="stat-title">Exposure</div>
-<div class="stat-value red">PBU (0.00)</div>
-</div>
-
-<div class="stat-box">
-<div class="stat-title">Available Balance</div>
-<div class="stat-value">PBU 0.00</div>
-</div>
-
-<div class="stat-box">
-<div class="stat-title">Transferable Sports P/L</div>
-<div class="stat-value green">PBU 0.00</div>
-</div>
-
-</div>
-
-<!-- MAIN -->
 
 <div class="container">
 
 <div class="toolbar">
-
 <div class="left-tools">
-
-<select id="statusFilter">
-<option value="all">All</option>
-<option value="active">Active</option>
+<select>
+<option>All</option>
+<option>Active</option>
 </select>
 
 <input type="text" id="searchInput" placeholder="Find member...">
 
-<button class="search-btn" onclick="renderTable()">
-Search
-</button>
-
+<button class="search-btn" onclick="renderTable()">Search</button>
 </div>
 
-<button class="admin-btn" onclick="openModal()">
-+ Add Admin
-</button>
-
+<button class="admin-btn" onclick="openModal()">+ Add Admin</button>
 </div>
-
-<div class="table-wrapper">
 
 <table>
-
 <thead>
 <tr>
-<th>ACCOUNT(AGENTS)</th>
-<th>REMAINING BAL</th>
-<th>TOTAL AGENT BAL</th>
-<th>TOTAL CLIENT BAL</th>
-<th>AVAILABLE BAL</th>
+<th>ACCOUNT</th>
+<th>REMAINING</th>
+<th>AGENT BAL</th>
+<th>CLIENT BAL</th>
+<th>AVAILABLE</th>
 <th>EXPOSURE</th>
-<th>CUMULATIVE P/L</th>
+<th>P/L</th>
 <th>STATUS</th>
 <th>ACTION</th>
 </tr>
 </thead>
 
 <tbody id="adminTable">
-<tr>
-<td colspan="9" class="empty">No Admin Created</td>
-</tr>
+<tr><td colspan="9" class="empty">No Admin Created</td></tr>
 </tbody>
 
 </table>
 
 </div>
 
-</div>
-
-<!-- MODAL -->
-
-<div class="modal" id="adminModal">
-
-<div class="modal-box">
-
-<h2>Create New Admin</h2>
-
-<input type="text" id="adminName" placeholder="Enter Admin Name">
-
-<input type="password" id="adminPassword" placeholder="Enter Password">
-
-<div class="modal-buttons">
-
-<button class="cancel-btn" onclick="closeModal()">
-Cancel
-</button>
-
-<button class="save-btn" onclick="saveAdmin()">
-Save Admin
-</button>
-
-</div>
-
-</div>
-
-</div>
-
 <script>
 
-/* MODAL */
+/* FIXED LOGOUT */
+function logout(){
+if(confirm("Are you sure to logout?")){
+alert("Logged out successfully");
+location.reload();
+}
+}
 
+/* MODAL */
 function openModal(){
-document.getElementById("adminModal").style.display = "flex";
+document.getElementById("adminModal").style.display="flex";
 }
 
 function closeModal(){
-document.getElementById("adminModal").style.display = "none";
+document.getElementById("adminModal").style.display="none";
 }
 
-/* SAVE ADMIN */
-
-function saveAdmin(){
-
-let name = document.getElementById("adminName").value.trim();
-let password = document.getElementById("adminPassword").value.trim();
-
-if(name === "" || password === ""){
-alert("Admin name & password required");
-return;
-}
-
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-users.push({
-name:name,
-password:password,
-status:"active"
-});
-
-localStorage.setItem("users", JSON.stringify(users));
-
-closeModal();
-
-/* CLEAR INPUT */
-
-document.getElementById("adminName").value = "";
-document.getElementById("adminPassword").value = "";
-
-renderTable();
-
-}
-
-/* RENDER TABLE */
-
-function renderTable(){
-
-let table = document.getElementById("adminTable");
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-let keyword = document.getElementById("searchInput").value.toLowerCase();
-
-let filteredUsers = users.filter(user =>
-user.name.toLowerCase().includes(keyword)
-);
-
-if(filteredUsers.length === 0){
-
-table.innerHTML = `
-<tr>
-<td colspan="9" class="empty">No Admin Found</td>
-</tr>
-`;
-
-return;
-}
-
-let html = "";
-
-filteredUsers.forEach((u,index)=>{
-
-html += `
-<tr>
-<td>${u.name}</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>0.00</td>
-<td class="red">(0.00)</td>
-<td class="green">0.00</td>
-<td>
-<span class="status-active">Active</span>
-</td>
-<td>
-<span class="action-btn" onclick="editAdmin(${index})">Edit</span>
-<span class="action-btn delete-btn" onclick="deleteAdmin(${index})">Delete</span>
-</td>
-</tr>
-`;
-
-});
-
-table.innerHTML = html;
-
-}
-
-/* DELETE */
-
-function deleteAdmin(index){
-
-if(confirm("Delete this admin?")){
-
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-users.splice(index,1);
-
-localStorage.setItem("users", JSON.stringify(users));
-
-renderTable();
-
-}
-
-}
-
-/* EDIT */
-
-function editAdmin(index){
-
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-let newName = prompt("Edit Admin Name", users[index].name);
-
-if(newName){
-users[index].name = newName;
-localStorage.setItem("users", JSON.stringify(users));
-renderTable();
-}
-
-}
-
-/* LOGOUT */
-
-function logout(){
-
-if(confirm("Are you sure to logout?")){
-location.reload();
-}
-
-}
-
-/* LIVE CLOCK */
-
+/* CLOCK */
 function updateClock(){
-
-let now = new Date();
-
-let time = now.toLocaleTimeString();
-
-document.getElementById("liveClock").innerHTML = time;
-
+document.getElementById("liveClock").innerHTML=new Date().toLocaleTimeString();
 }
-
 setInterval(updateClock,1000);
 updateClock();
-
-/* FIRST LOAD */
-
-renderTable();
 
 </script>
 
