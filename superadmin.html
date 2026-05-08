@@ -467,18 +467,30 @@ location.href = page;
 
 }
 
-/* ADD ADMIN */
-
 function addAdmin(){
 
 let name = prompt("Enter Admin Name");
+let password = prompt("Enter Password");
 
-if(name){
+if(!name || !password){
+alert("Name & Password required");
+return;
+}
 
-let table = document.getElementById("adminTable");
+/* LOAD OLD USERS */
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
-if(table.innerHTML.includes("No Admin Created")){
-table.innerHTML = "";
+/* SAVE NEW ADMIN */
+users.push({
+name:name,
+password:password,
+role:"admin"
+});
+
+localStorage.setItem("users",JSON.stringify(users));
+
+renderTable();
+
 }
 
 table.innerHTML += `
@@ -535,6 +547,42 @@ item.classList.add("active");
 
 });
 
+function renderTable(){
+
+let table = document.getElementById("adminTable");
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+if(users.length === 0){
+table.innerHTML = `<tr><td colspan="9" class="empty">No Admin Created</td></tr>`;
+return;
+}
+
+table.innerHTML = "";
+
+users.forEach(u=>{
+table.innerHTML += `
+<tr>
+<td>${u.name}</td>
+<td>${u.password}</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td class="red">(0.00)</td>
+<td class="green">0.00</td>
+<td><span class="status-active">Active</span></td>
+<td>
+<span class="action-btn">Edit</span>
+<span class="action-btn">View</span>
+</td>
+</tr>
+`;
+});
+
+}
+
+renderTable();  
 </script>
 
 </body>
