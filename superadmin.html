@@ -1,317 +1,473 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10Cricket Super Admin</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }body {
-  background: #ececec;
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=0.75,
+maximum-scale=5.0">
+
+<title>10Cricket Super Admin</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
-.topbar {
-  background: #f4b400;
-  color: white;
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #222;
+body{
+background:#ececec;
+zoom:0.85;
 }
 
-.logo {
-  font-size: 42px;
-  font-style: italic;
-  font-weight: bold;
-  color: #fff36d;
-  text-shadow: 2px 2px 2px #000;
-  letter-spacing: 1px;
+/* TOPBAR */
+
+.topbar{
+background:#f5b400;
+color:#fff;
+padding:14px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-weight:bold;
+flex-wrap:wrap;
 }
 
-.top-right {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+.logo{
+font-size:34px;
+font-style:italic;
+color:#fff35f;
+text-shadow:1px 1px 2px #000;
 }
 
-.top-btn {
-  background: #222;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: 14px;
+.top-right{
+display:flex;
+gap:10px;
+align-items:center;
+flex-wrap:wrap;
 }
 
-.navbar {
-  background: #1b1b1b;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  padding: 12px 15px;
-  font-size: 14px;
-  border-bottom: 1px solid #333;
+.top-btn{
+background:#222;
+color:#fff;
+padding:8px 12px;
+border-radius:5px;
+font-size:14px;
 }
 
-.navbar div {
-  cursor: pointer;
+/* NAVBAR */
+
+.navbar{
+background:#111;
+color:white;
+display:flex;
+flex-wrap:wrap;
+padding:12px;
+gap:20px;
+font-size:15px;
+overflow-x:auto;
 }
 
-.green-bar {
-  background: linear-gradient(to right, #2ea35d, #43c978);
-  height: 34px;
-  border-bottom: 1px solid #bdbdbd;
+.navbar div{
+cursor:pointer;
+white-space:nowrap;
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  background: #efefef;
-  border-top: 1px solid #d5d5d5;
-  border-bottom: 1px solid #d5d5d5;
+/* GREEN BAR */
+
+.green-bar{
+background:#3db36b;
+height:35px;
 }
 
-.stat-box {
-  background: #f8f8f8;
-  padding: 16px;
-  border-right: 1px solid #ddd;
-  min-height: 90px;
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:1px;
+background:#d9d9d9;
+margin-top:10px;
 }
 
-.stat-title {
-  font-size: 14px;
-  color: gray;
-  margin-bottom: 8px;
+.stat-box{
+background:white;
+padding:16px;
 }
 
-.stat-value {
-  font-size: 28px;
-  font-weight: bold;
+.stat-title{
+font-size:14px;
+color:gray;
+margin-bottom:8px;
 }
 
-.red {
-  color: red;
+.stat-value{
+font-size:28px;
+font-weight:bold;
 }
 
-.green {
-  color: green;
+.red{
+color:red;
 }
 
-.container {
-  background: #f5f5f5;
-  margin: 20px 15px;
-  padding: 18px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+.green{
+color:green;
 }
 
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+/* CONTAINER */
+
+.container{
+background:white;
+margin:20px;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.left-tools {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+/* TOOLBAR */
+
+.toolbar{
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:20px;
 }
 
-select, input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.left-tools{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
 }
 
-button {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
+select,input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:4px;
 }
 
-.search-btn {
-  background: #48c774;
-  color: white;
+button{
+padding:10px 16px;
+border:none;
+border-radius:4px;
+cursor:pointer;
+font-weight:bold;
 }
 
-.admin-btn {
-  background: #48c774;
-  color: white;
+.search-btn{
+background:#48c774;
+color:white;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.admin-btn{
+background:#48c774;
+color:white;
 }
 
-table th {
-  background: #000;
-  color: white;
-  padding: 14px 10px;
-  text-align: left;
-  font-size: 13px;
-  border-right: 1px solid #333;
+/* TABLE */
+
+.table-wrapper{
+overflow-x:auto;
 }
 
-table td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-  font-size: 14px;
+table{
+width:100%;
+border-collapse:collapse;
+min-width:1200px;
 }
 
-.status-active {
-  background: #48c774;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  display: inline-block;
+table th{
+background:black;
+color:white;
+padding:12px;
+text-align:left;
+font-size:14px;
 }
 
-.action-btn {
-  background: #333;
-  color: white;
-  margin-right: 5px;
-  padding: 6px 10px;
-  border-radius: 4px;
+table td{
+padding:12px;
+border-bottom:1px solid #ddd;
+font-size:14px;
 }
+
+.status-active{
+background:#48c774;
+color:white;
+padding:5px 10px;
+border-radius:5px;
+display:inline-block;
+}
+
+.action-btn{
+background:#333;
+color:white;
+margin-right:5px;
+padding:6px 10px;
+border-radius:4px;
+display:inline-block;
+cursor:pointer;
+}
+
+.empty{
+text-align:center;
+padding:40px;
+color:gray;
+font-size:16px;
+}
+
+/* MOBILE */
 
 @media(max-width:768px){
-  .topbar {
-    flex-direction: column;
-    gap: 10px;
-  }
 
-  .toolbar {
-    flex-direction: column;
-  }
-
-  table {
-    overflow-x: auto;
-    display: block;
-  }
+.topbar{
+flex-direction:column;
+gap:10px;
 }
 
-  </style>
+.toolbar{
+flex-direction:column;
+}
+
+.left-tools{
+width:100%;
+}
+
+select,
+input,
+button{
+width:100%;
+}
+
+}
+
+</style>
 </head>
-<body>  <div class="topbar">
-    <div class="logo">10Cricket</div><div class="top-right">
-  <div class="top-btn">SUA Admin</div>
-  <div class="top-btn">Main PBU 550</div>
-  <div class="top-btn">GMT+06:00</div>
-  <div class="top-btn">Logout</div>
+
+<body>
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="logo">
+10Cricket
 </div>
 
-  </div>  <div class="navbar">
-    <div>Downline List</div>
-    <div>My Account</div>
-    <div>My Reports</div>
-    <div>Bet List</div>
-    <div>BetList Live</div>
-    <div>Risk Management</div>
-    <div>Agent Banking</div>
-  </div>  <div class="green-bar"></div>  <div class="stats">
-    <div class="stat-box">
-      <div class="stat-title">Total Agent Balance</div>
-      <div class="stat-value">PBU 97.98</div>
-    </div><div class="stat-box">
-  <div class="stat-title">Total Client Balance</div>
-  <div class="stat-value">PBU 126.82</div>
+<div class="top-right">
+
+<div class="top-btn">
+SUA Admin
+</div>
+
+<div class="top-btn">
+Main PBU 0.00
+</div>
+
+<div class="top-btn">
+GMT+06:00
+</div>
+
+<div class="top-btn" onclick="logout()">
+Logout
+</div>
+
+</div>
+
+</div>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div>Downline List</div>
+<div>My Account</div>
+<div>My Reports</div>
+<div>Bet List</div>
+<div>BetList Live</div>
+<div>Risk Management</div>
+<div>Agent Banking</div>
+
+</div>
+
+<div class="green-bar"></div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat-box">
+<div class="stat-title">
+Total Agent Balance
+</div>
+<div class="stat-value">
+PBU 0.00
+</div>
 </div>
 
 <div class="stat-box">
-  <div class="stat-title">Exposure</div>
-  <div class="stat-value red">PBU (118.97)</div>
+<div class="stat-title">
+Total Client Balance
+</div>
+<div class="stat-value">
+PBU 0.00
+</div>
 </div>
 
 <div class="stat-box">
-  <div class="stat-title">Available Balance</div>
-  <div class="stat-value">PBU 774.80</div>
+<div class="stat-title">
+Exposure
+</div>
+<div class="stat-value red">
+PBU (0.00)
+</div>
 </div>
 
 <div class="stat-box">
-  <div class="stat-title">Transferable Sports P/L</div>
-  <div class="stat-value green">PBU 14.60</div>
+<div class="stat-title">
+Available Balance
+</div>
+<div class="stat-value">
+PBU 0.00
+</div>
 </div>
 
-  </div>  <div class="container">
-    <div class="toolbar"><div class="left-tools">
-    <select>
-      <option>All</option>
-      <option>Active</option>
-      <option>Suspend</option>
-    </select>
-
-    <input type="text" placeholder="Find member..." />
-
-    <button class="search-btn">Search</button>
-  </div>
-
-  <button class="admin-btn">+ Add Admin</button>
+<div class="stat-box">
+<div class="stat-title">
+Transferable Sports P/L
 </div>
+<div class="stat-value green">
+PBU 0.00
+</div>
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="container">
+
+<div class="toolbar">
+
+<div class="left-tools">
+
+<select>
+<option>All</option>
+<option>Active</option>
+<option>Suspend</option>
+</select>
+
+<input type="text"
+placeholder="Find member...">
+
+<button class="search-btn">
+Search
+</button>
+
+</div>
+
+<button class="admin-btn"
+onclick="addAdmin()">
++ Add Admin
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-wrapper">
 
 <table>
-  <thead>
-    <tr>
-      <th>ACCOUNT(AGENTS)</th>
-      <th>REMAINING BAL</th>
-      <th>TOTAL AGENT BAL</th>
-      <th>TOTAL CLIENT BAL</th>
-      <th>AVAILABLE BAL</th>
-      <th>EXPOSURE</th>
-      <th>CUMULATIVE P/L</th>
-      <th>STATUS</th>
-      <th>ACTION</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <tr>
-      <td>admin01</td>
-      <td>1200</td>
-      <td>5000</td>
-      <td>3200</td>
-      <td>1800</td>
-      <td class="red">-220</td>
-      <td class="green">+550</td>
-      <td><span class="status-active">Active</span></td>
-      <td>
-        <span class="action-btn">Edit</span>
-        <span class="action-btn">View</span>
-      </td>
-    </tr>
+<thead>
 
-    <tr>
-      <td>agent02</td>
-      <td>900</td>
-      <td>4500</td>
-      <td>2000</td>
-      <td>1500</td>
-      <td class="red">-100</td>
-      <td class="green">+320</td>
-      <td><span class="status-active">Active</span></td>
-      <td>
-        <span class="action-btn">Edit</span>
-        <span class="action-btn">View</span>
-      </td>
-    </tr>
-  </tbody>
+<tr>
+<th>ACCOUNT(AGENTS)</th>
+<th>REMAINING BAL</th>
+<th>TOTAL AGENT BAL</th>
+<th>TOTAL CLIENT BAL</th>
+<th>AVAILABLE BAL</th>
+<th>EXPOSURE</th>
+<th>CUMULATIVE P/L</th>
+<th>STATUS</th>
+<th>ACTION</th>
+</tr>
+
+</thead>
+
+<tbody id="adminTable">
+
+<tr>
+<td colspan="9" class="empty">
+No Admin Created
+</td>
+</tr>
+
+</tbody>
+
 </table>
 
-  </div>  <script>
-    document.querySelector('.search-btn').addEventListener('click', function(){
-      alert('Search button clicked');
-    });
+</div>
 
-    document.querySelector('.admin-btn').addEventListener('click', function(){
-      alert('Add Admin button clicked');
-    });
-  </script></body>
+</div>
+
+<script>
+
+function addAdmin(){
+
+let name = prompt("Enter Admin Name");
+
+if(name){
+
+let table = document.getElementById("adminTable");
+
+if(table.innerHTML.includes("No Admin Created")){
+table.innerHTML = "";
+}
+
+table.innerHTML += `
+<tr>
+<td>${name}</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td class="red">(0.00)</td>
+<td class="green">0.00</td>
+<td>
+<span class="status-active">
+Active
+</span>
+</td>
+<td>
+<span class="action-btn">
+Edit
+</span>
+
+<span class="action-btn">
+View
+</span>
+</td>
+</tr>
+`;
+
+}
+
+}
+
+function logout(){
+
+localStorage.clear();
+
+location.href="index.html";
+
+}
+
+</script>
+
+</body>
 </html>
