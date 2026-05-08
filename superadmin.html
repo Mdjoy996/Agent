@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1400">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>10Cricket Super Admin</title>
 
 <style>
@@ -17,100 +15,116 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#e9f5ea;
-min-width:1400px;
-overflow-x:auto;
+background:#eef5ef;
+min-height:100vh;
 }
 
 /* TOPBAR */
 
 .topbar{
 background:#0f7b32;
-color:#fff;
+color:white;
 padding:14px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-font-weight:bold;
+flex-wrap:wrap;
+gap:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.15);
 }
 
 .logo{
 font-size:34px;
 font-style:italic;
+font-weight:bold;
 color:#d7ff5d;
-text-shadow:1px 1px 2px #000;
+text-shadow:1px 1px 3px #000;
 }
 
 .top-right{
 display:flex;
 gap:10px;
+flex-wrap:wrap;
 align-items:center;
 }
 
 .top-btn{
 background:#063d17;
-color:#fff;
-padding:8px 14px;
-border-radius:5px;
+padding:9px 14px;
+border-radius:6px;
 font-size:14px;
+font-weight:bold;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.logout-btn{
+background:#c62828;
+cursor:pointer;
+transition:0.3s;
+}
+
+.logout-btn:hover{
+background:#e53935;
 }
 
 /* NAVBAR */
 
 .navbar{
 background:#04280f;
-color:white;
+padding:12px 15px;
 display:flex;
-padding:12px 20px;
-gap:15px;
-font-size:14px;
+gap:12px;
 overflow-x:auto;
 border-bottom:3px solid #1fc75f;
 }
 
 .nav-item{
 background:#063d17;
-padding:10px 16px;
+color:white;
+padding:11px 16px;
 border-radius:6px;
+font-size:14px;
+font-weight:bold;
+white-space:nowrap;
 cursor:pointer;
 transition:0.3s;
-white-space:nowrap;
-font-weight:bold;
 border:1px solid transparent;
 }
 
 .nav-item:hover{
 background:#1fc75f;
-color:#fff;
 transform:translateY(-2px);
 }
 
 .active{
 background:#1fc75f;
-color:white;
-border:1px solid #8fffaa;
+border-color:#8fffaa;
 }
 
-/* GREEN BAR */
-
 .green-bar{
+height:34px;
 background:#1fc75f;
-height:35px;
 }
 
 /* STATS */
 
 .stats{
 display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:1px;
-background:#c9dccc;
-margin-top:10px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+padding:20px;
 }
 
 .stat-box{
 background:white;
-padding:18px;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.stat-box:hover{
+transform:translateY(-4px);
 }
 
 .stat-title{
@@ -120,12 +134,12 @@ margin-bottom:10px;
 }
 
 .stat-value{
-font-size:30px;
+font-size:28px;
 font-weight:bold;
 }
 
 .red{
-color:red;
+color:#d32f2f;
 }
 
 .green{
@@ -138,8 +152,8 @@ color:#0f8c2c;
 background:white;
 margin:20px;
 padding:20px;
-border-radius:8px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+border-radius:10px;
+box-shadow:0 3px 12px rgba(0,0,0,0.08);
 }
 
 /* TOOLBAR */
@@ -148,28 +162,33 @@ box-shadow:0 0 10px rgba(0,0,0,0.1);
 display:flex;
 justify-content:space-between;
 align-items:center;
+flex-wrap:wrap;
+gap:15px;
 margin-bottom:20px;
 }
 
 .left-tools{
 display:flex;
 gap:10px;
+flex-wrap:wrap;
 }
 
 select,
 input{
-padding:10px;
+padding:11px;
 border:1px solid #ccc;
-border-radius:4px;
-width:220px;
+border-radius:5px;
+outline:none;
+min-width:220px;
 }
 
 button{
-padding:10px 16px;
+padding:11px 16px;
 border:none;
-border-radius:4px;
-cursor:pointer;
+border-radius:5px;
 font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
 
 .search-btn{
@@ -177,36 +196,48 @@ background:#1ea84b;
 color:white;
 }
 
+.search-btn:hover{
+background:#17913f;
+}
+
 .admin-btn{
 background:#0f7b32;
 color:white;
+}
+
+.admin-btn:hover{
+background:#0b6328;
 }
 
 /* TABLE */
 
 .table-wrapper{
 overflow-x:auto;
+border-radius:8px;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-min-width:1300px;
+min-width:1100px;
 }
 
 table th{
 background:#063d17;
 color:white;
-padding:14px;
-text-align:left;
+padding:15px;
 font-size:14px;
+text-align:left;
 }
 
 table td{
-padding:14px;
-border-bottom:1px solid #ddd;
+padding:15px;
 font-size:14px;
-background:white;
+border-bottom:1px solid #eee;
+}
+
+table tr:hover td{
+background:#f4fff7;
 }
 
 .status-active{
@@ -214,17 +245,31 @@ background:#1db954;
 color:white;
 padding:5px 10px;
 border-radius:5px;
-display:inline-block;
+font-size:13px;
+font-weight:bold;
 }
 
 .action-btn{
 background:#063d17;
 color:white;
-margin-right:5px;
-padding:6px 10px;
+padding:7px 10px;
 border-radius:4px;
-display:inline-block;
+margin-right:5px;
 cursor:pointer;
+display:inline-block;
+font-size:13px;
+}
+
+.action-btn:hover{
+background:#1fc75f;
+}
+
+.delete-btn{
+background:#c62828;
+}
+
+.delete-btn:hover{
+background:#e53935;
 }
 
 .empty{
@@ -232,6 +277,82 @@ text-align:center;
 padding:40px;
 color:gray;
 font-size:16px;
+}
+
+/* MODAL */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.5);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:999;
+padding:20px;
+}
+
+.modal-box{
+background:white;
+width:100%;
+max-width:420px;
+padding:25px;
+border-radius:10px;
+}
+
+.modal-box h2{
+margin-bottom:20px;
+color:#0f7b32;
+}
+
+.modal-box input{
+width:100%;
+margin-bottom:15px;
+}
+
+.modal-buttons{
+display:flex;
+justify-content:flex-end;
+gap:10px;
+}
+
+.save-btn{
+background:#0f7b32;
+color:white;
+}
+
+.cancel-btn{
+background:#c62828;
+color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.logo{
+font-size:26px;
+}
+
+.stat-value{
+font-size:22px;
+}
+
+.container{
+margin:10px;
+padding:15px;
+}
+
+select,
+input{
+width:100%;
+min-width:100%;
+}
+
+.left-tools{
+width:100%;
+}
+
 }
 
 /* SCROLLBAR */
@@ -247,7 +368,7 @@ border-radius:10px;
 }
 
 ::-webkit-scrollbar-track{
-background:#d9d9d9;
+background:#ddd;
 }
 
 </style>
@@ -259,25 +380,15 @@ background:#d9d9d9;
 
 <div class="topbar">
 
-<div class="logo">
-10Cricket
-</div>
+<div class="logo">10Cricket</div>
 
 <div class="top-right">
 
-<div class="top-btn">
-SUA Admin
-</div>
+<div class="top-btn">SUA Admin</div>
+<div class="top-btn">Main PBU 0.00</div>
+<div class="top-btn" id="liveClock">GMT+06:00</div>
 
-<div class="top-btn">
-Main PBU 0.00
-</div>
-
-<div class="top-btn">
-GMT+06:00
-</div>
-
-<div class="top-btn" onclick="logout()">
+<div class="top-btn logout-btn" onclick="logout()">
 Logout
 </div>
 
@@ -285,54 +396,19 @@ Logout
 
 </div>
 
-<!-- FULL NAVBAR -->
+<!-- NAVBAR -->
 
 <div class="navbar">
 
-<div class="nav-item active"
-onclick="openPage('superadmin.html')">
-🏠 Dashboard
-</div>
-
-<div class="nav-item"
-onclick="openPage('downline.html')">
-👥 Downline List
-</div>
-
-<div class="nav-item"
-onclick="openPage('account.html')">
-💼 My Account
-</div>
-
-<div class="nav-item"
-onclick="openPage('reports.html')">
-📊 My Reports
-</div>
-
-<div class="nav-item"
-onclick="openPage('betlist.html')">
-🎲 Bet List
-</div>
-
-<div class="nav-item"
-onclick="openPage('betlive.html')">
-📡 BetList Live
-</div>
-
-<div class="nav-item"
-onclick="openPage('risk.html')">
-⚠️ Risk Management
-</div>
-
-<div class="nav-item"
-onclick="openPage('banking.html')">
-🏦 Agent Banking
-</div>
-
-<div class="nav-item"
-onclick="openPage('settings.html')">
-⚙️ Settings
-</div>
+<div class="nav-item active">🏠 Dashboard</div>
+<div class="nav-item">👥 Downline List</div>
+<div class="nav-item">💼 My Account</div>
+<div class="nav-item">📊 My Reports</div>
+<div class="nav-item">🎲 Bet List</div>
+<div class="nav-item">📡 BetList Live</div>
+<div class="nav-item">⚠️ Risk Management</div>
+<div class="nav-item">🏦 Agent Banking</div>
+<div class="nav-item">⚙️ Settings</div>
 
 </div>
 
@@ -343,48 +419,28 @@ onclick="openPage('settings.html')">
 <div class="stats">
 
 <div class="stat-box">
-<div class="stat-title">
-Total Agent Balance
-</div>
-<div class="stat-value">
-PBU 0.00
-</div>
+<div class="stat-title">Total Agent Balance</div>
+<div class="stat-value">PBU 0.00</div>
 </div>
 
 <div class="stat-box">
-<div class="stat-title">
-Total Client Balance
-</div>
-<div class="stat-value">
-PBU 0.00
-</div>
+<div class="stat-title">Total Client Balance</div>
+<div class="stat-value">PBU 0.00</div>
 </div>
 
 <div class="stat-box">
-<div class="stat-title">
-Exposure
-</div>
-<div class="stat-value red">
-PBU (0.00)
-</div>
+<div class="stat-title">Exposure</div>
+<div class="stat-value red">PBU (0.00)</div>
 </div>
 
 <div class="stat-box">
-<div class="stat-title">
-Available Balance
-</div>
-<div class="stat-value">
-PBU 0.00
-</div>
+<div class="stat-title">Available Balance</div>
+<div class="stat-value">PBU 0.00</div>
 </div>
 
 <div class="stat-box">
-<div class="stat-title">
-Transferable Sports P/L
-</div>
-<div class="stat-value green">
-PBU 0.00
-</div>
+<div class="stat-title">Transferable Sports P/L</div>
+<div class="stat-value green">PBU 0.00</div>
 </div>
 
 </div>
@@ -397,36 +453,30 @@ PBU 0.00
 
 <div class="left-tools">
 
-<select>
-<option>All</option>
-<option>Active</option>
-<option>Suspend</option>
+<select id="statusFilter">
+<option value="all">All</option>
+<option value="active">Active</option>
 </select>
 
-<input type="text"
-placeholder="Find member...">
+<input type="text" id="searchInput" placeholder="Find member...">
 
-<button class="search-btn">
+<button class="search-btn" onclick="renderTable()">
 Search
 </button>
 
 </div>
 
-<button class="admin-btn"
-onclick="addAdmin()">
+<button class="admin-btn" onclick="openModal()">
 + Add Admin
 </button>
 
 </div>
-
-<!-- TABLE -->
 
 <div class="table-wrapper">
 
 <table>
 
 <thead>
-
 <tr>
 <th>ACCOUNT(AGENTS)</th>
 <th>REMAINING BAL</th>
@@ -438,17 +488,12 @@ onclick="addAdmin()">
 <th>STATUS</th>
 <th>ACTION</th>
 </tr>
-
 </thead>
 
 <tbody id="adminTable">
-
 <tr>
-<td colspan="9" class="empty">
-No Admin Created
-</td>
+<td colspan="9" class="empty">No Admin Created</td>
 </tr>
-
 </tbody>
 
 </table>
@@ -457,45 +502,110 @@ No Admin Created
 
 </div>
 
+<!-- MODAL -->
+
+<div class="modal" id="adminModal">
+
+<div class="modal-box">
+
+<h2>Create New Admin</h2>
+
+<input type="text" id="adminName" placeholder="Enter Admin Name">
+
+<input type="password" id="adminPassword" placeholder="Enter Password">
+
+<div class="modal-buttons">
+
+<button class="cancel-btn" onclick="closeModal()">
+Cancel
+</button>
+
+<button class="save-btn" onclick="saveAdmin()">
+Save Admin
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
 
-/* PAGE REDIRECT */
+/* MODAL */
 
-function openPage(page){
-
-location.href = page;
-
+function openModal(){
+document.getElementById("adminModal").style.display = "flex";
 }
 
-function addAdmin(){
+function closeModal(){
+document.getElementById("adminModal").style.display = "none";
+}
 
-let name = prompt("Enter Admin Name");
-let password = prompt("Enter Password");
+/* SAVE ADMIN */
 
-if(!name || !password){
-alert("Name & Password required");
+function saveAdmin(){
+
+let name = document.getElementById("adminName").value.trim();
+let password = document.getElementById("adminPassword").value.trim();
+
+if(name === "" || password === ""){
+alert("Admin name & password required");
 return;
 }
 
-/* LOAD OLD USERS */
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-/* SAVE NEW ADMIN */
 users.push({
 name:name,
 password:password,
-role:"admin"
+status:"active"
 });
 
-localStorage.setItem("users",JSON.stringify(users));
+localStorage.setItem("users", JSON.stringify(users));
+
+closeModal();
+
+/* CLEAR INPUT */
+
+document.getElementById("adminName").value = "";
+document.getElementById("adminPassword").value = "";
 
 renderTable();
 
 }
 
-table.innerHTML += `
+/* RENDER TABLE */
+
+function renderTable(){
+
+let table = document.getElementById("adminTable");
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+let keyword = document.getElementById("searchInput").value.toLowerCase();
+
+let filteredUsers = users.filter(user =>
+user.name.toLowerCase().includes(keyword)
+);
+
+if(filteredUsers.length === 0){
+
+table.innerHTML = `
 <tr>
-<td>${name}</td>
+<td colspan="9" class="empty">No Admin Found</td>
+</tr>
+`;
+
+return;
+}
+
+let html = "";
+
+filteredUsers.forEach((u,index)=>{
+
+html += `
+<tr>
+<td>${u.name}</td>
 <td>0.00</td>
 <td>0.00</td>
 <td>0.00</td>
@@ -503,22 +613,51 @@ table.innerHTML += `
 <td class="red">(0.00)</td>
 <td class="green">0.00</td>
 <td>
-<span class="status-active">
-Active
-</span>
+<span class="status-active">Active</span>
 </td>
 <td>
-<span class="action-btn">
-Edit
-</span>
-
-<span class="action-btn">
-View
-</span>
+<span class="action-btn" onclick="editAdmin(${index})">Edit</span>
+<span class="action-btn delete-btn" onclick="deleteAdmin(${index})">Delete</span>
 </td>
 </tr>
 `;
 
+});
+
+table.innerHTML = html;
+
+}
+
+/* DELETE */
+
+function deleteAdmin(index){
+
+if(confirm("Delete this admin?")){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+users.splice(index,1);
+
+localStorage.setItem("users", JSON.stringify(users));
+
+renderTable();
+
+}
+
+}
+
+/* EDIT */
+
+function editAdmin(index){
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+let newName = prompt("Edit Admin Name", users[index].name);
+
+if(newName){
+users[index].name = newName;
+localStorage.setItem("users", JSON.stringify(users));
+renderTable();
 }
 
 }
@@ -527,62 +666,31 @@ View
 
 function logout(){
 
-localStorage.clear();
-
-location.href="index.html";
+if(confirm("Are you sure to logout?")){
+location.reload();
+}
 
 }
 
-/* ACTIVE MENU */
+/* LIVE CLOCK */
 
-const currentPage = window.location.pathname.split("/").pop();
+function updateClock(){
 
-document.querySelectorAll(".nav-item").forEach(item=>{
+let now = new Date();
 
-const onclick = item.getAttribute("onclick");
+let time = now.toLocaleTimeString();
 
-if(onclick && onclick.includes(currentPage)){
-item.classList.add("active");
-}
-
-});
-
-function renderTable(){
-
-let table = document.getElementById("adminTable");
-
-let users = JSON.parse(localStorage.getItem("users")) || [];
-
-if(users.length === 0){
-table.innerHTML = `<tr><td colspan="9" class="empty">No Admin Created</td></tr>`;
-return;
-}
-
-table.innerHTML = "";
-
-users.forEach(u=>{
-table.innerHTML += `
-<tr>
-<td>${u.name}</td>
-<td>${u.password}</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>0.00</td>
-<td class="red">(0.00)</td>
-<td class="green">0.00</td>
-<td><span class="status-active">Active</span></td>
-<td>
-<span class="action-btn">Edit</span>
-<span class="action-btn">View</span>
-</td>
-</tr>
-`;
-});
+document.getElementById("liveClock").innerHTML = time;
 
 }
 
-renderTable();  
+setInterval(updateClock,1000);
+updateClock();
+
+/* FIRST LOAD */
+
+renderTable();
+
 </script>
 
 </body>
