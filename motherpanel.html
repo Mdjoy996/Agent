@@ -1,0 +1,344 @@
+# Mother Panel (Admin Dashboard)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mother Panel</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#000;
+color:#fff;
+}
+
+/* SIDEBAR */
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:230px;
+height:100vh;
+background:#071807;
+border-right:2px solid #00ff99;
+padding-top:20px;
+}
+
+.logo{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+color:#00ff99;
+margin-bottom:30px;
+}
+
+.menu a{
+display:block;
+padding:15px 20px;
+color:#fff;
+text-decoration:none;
+border-bottom:1px solid rgba(255,255,255,0.05);
+transition:0.3s;
+}
+
+.menu a:hover{
+background:#00aa00;
+}
+
+/* MAIN */
+.main{
+margin-left:230px;
+padding:20px;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.topbar h2{
+margin:0;
+color:#00ff99;
+}
+
+.admin{
+background:#111;
+padding:10px 15px;
+border-radius:10px;
+border:1px solid #00ff99;
+}
+
+/* CARDS */
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.card{
+background:#111;
+padding:20px;
+border-radius:15px;
+border:1px solid rgba(0,255,153,0.3);
+box-shadow:0 0 10px rgba(0,255,153,0.1);
+}
+
+.card h3{
+margin:0;
+font-size:18px;
+color:#00ff99;
+}
+
+.card p{
+font-size:28px;
+font-weight:bold;
+margin-top:10px;
+}
+
+/* TABLE */
+.tableBox{
+margin-top:25px;
+background:#111;
+padding:15px;
+border-radius:15px;
+border:1px solid rgba(0,255,153,0.2);
+overflow:auto;
+}
+
+.tableBox h3{
+margin-top:0;
+color:#00ff99;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:12px;
+text-align:left;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+th{
+color:#00ff99;
+}
+
+.approve{
+background:#00aa00;
+color:#fff;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.reject{
+background:red;
+color:#fff;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+margin-left:5px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.sidebar{
+width:100%;
+height:auto;
+position:relative;
+}
+
+.main{
+margin-left:0;
+}
+
+.cards{
+grid-template-columns:1fr 1fr;
+}
+}
+
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<div class="logo">10Cricket</div>
+
+<div class="menu">
+<a href="#">👑 Mother Panel</a>
+<a href="#">🛡 Super Admin</a>
+<a href="#">⚡ Admin</a>
+<a href="#">🧩 Sub Admin</a>
+<a href="#">🌐 Super Agent</a>
+<a href="#">🎯 Agent</a>
+<a href="#">📊 Dashboard</a>
+<a href="#">👥 Users</a>
+<a href="#">💰 Deposits</a>
+<a href="#">💸 Withdraw</a>
+<a href="#">🎮 Bet History</a>
+<a href="#">⚙ Settings</a>
+<a href="#" onclick="logout()">🚪 Logout</a>
+</div>
+</div>
+
+<!-- MAIN -->
+
+<!-- CREATE PANELS -->
+<div style="margin-bottom:20px;background:#111;padding:20px;border-radius:15px;border:1px solid rgba(0,255,153,0.2);">
+<h3 style="margin-top:0;color:#00ff99;">Create Panel</h3>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
+<button class="approve">Create Super Admin</button>
+<button class="approve">Create Admin</button>
+<button class="approve">Create Sub Admin</button>
+<button class="approve">Create Super Agent</button>
+<button class="approve">Create Agent</button>
+<button class="approve">Create User</button>
+</div>
+
+</div>
+
+<!-- HIERARCHY -->
+<div class="tableBox">
+<h3>Panel Hierarchy</h3>
+
+<table>
+<tr>
+<th>Level</th>
+<th>Create Access</th>
+<th>Controls</th>
+</tr>
+
+<tr>
+<td>👑 Mother Panel</td>
+<td>Super Admin</td>
+<td>Full Access</td>
+</tr>
+
+<tr>
+<td>🛡 Super Admin</td>
+<td>Admin</td>
+<td>Manage Admin</td>
+</tr>
+
+<tr>
+<td>⚡ Admin</td>
+<td>Sub Admin</td>
+<td>Manage Sub Admin</td>
+</tr>
+
+<tr>
+<td>🧩 Sub Admin</td>
+<td>Super Agent</td>
+<td>Manage Super Agent</td>
+</tr>
+
+<tr>
+<td>🌐 Super Agent</td>
+<td>Agent</td>
+<td>Manage Agent</td>
+</tr>
+
+<tr>
+<td>🎯 Agent</td>
+<td>User</td>
+<td>Manage Users</td>
+</tr>
+
+</table>
+</div>
+
+
+<div class="main">
+
+<div class="topbar">
+<h2>Mother Panel</h2>
+<div class="admin">Admin</div>
+</div>
+
+<!-- CARDS -->
+<div class="cards">
+
+<div class="card">
+<h3>Total Users</h3>
+<p>1520</p>
+</div>
+
+<div class="card">
+<h3>Total Deposit</h3>
+<p>$12,500</p>
+</div>
+
+<div class="card">
+<h3>Total Withdraw</h3>
+<p>$4,800</p>
+</div>
+
+<div class="card">
+<h3>Live Bets</h3>
+<p>320</p>
+</div>
+
+</div>
+
+<!-- TABLE -->
+<div class="tableBox">
+<h3>Recent Deposit Requests</h3>
+
+<table>
+<tr>
+<th>User</th>
+<th>Amount</th>
+<th>Method</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>Rahim</td>
+<td>$100</td>
+<td>bKash</td>
+<td>
+<button class="approve">Approve</button>
+<button class="reject">Reject</button>
+</td>
+</tr>
+
+<tr>
+<td>Karim</td>
+<td>$50</td>
+<td>Nagad</td>
+<td>
+<button class="approve">Approve</button>
+<button class="reject">Reject</button>
+</td>
+</tr>
+
+</table>
+</div>
+
+</div>
+
+<script>
+
+function logout(){
+localStorage.removeItem("currentUser");
+window.location.href="login.html";
+}
+
+</script>
+
+</body>
+</html>
+```
