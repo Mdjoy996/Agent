@@ -1,344 +1,287 @@
-# Mother Panel (Admin Dashboard)
-
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mother Panel</title>
+<meta name="viewport" content="width=1400">
+
+<title>10Cricket Mother Panel</title>
 
 <style>
 
-body{
+*{
 margin:0;
-font-family:Arial;
-background:#000;
-color:#fff;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
-/* SIDEBAR */
-.sidebar{
-position:fixed;
-left:0;
-top:0;
-width:230px;
-height:100vh;
-background:#071807;
-border-right:2px solid #00ff99;
-padding-top:20px;
+body{
+background:#e9f5ea;
+min-width:1400px;
+overflow-x:auto;
+}
+
+/* TOPBAR */
+
+.topbar{
+background:#0f7b32;
+color:#fff;
+padding:14px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-weight:bold;
 }
 
 .logo{
-text-align:center;
-font-size:24px;
-font-weight:bold;
-color:#00ff99;
-margin-bottom:30px;
+font-size:34px;
+font-style:italic;
+color:#d7ff5d;
+text-shadow:1px 1px 2px #000;
 }
 
-.menu a{
-display:block;
-padding:15px 20px;
+.top-right{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.top-btn{
+background:#063d17;
 color:#fff;
-text-decoration:none;
-border-bottom:1px solid rgba(255,255,255,0.05);
-transition:0.3s;
+padding:8px 14px;
+border-radius:5px;
+font-size:14px;
 }
 
-.menu a:hover{
-background:#00aa00;
+/* NAVBAR */
+
+.navbar{
+background:#04280f;
+color:white;
+display:flex;
+padding:12px 20px;
+gap:15px;
+font-size:14px;
+overflow-x:auto;
+border-bottom:3px solid #1fc75f;
+}
+
+.nav-item{
+background:#063d17;
+padding:10px 16px;
+border-radius:6px;
+cursor:pointer;
+transition:0.3s;
+white-space:nowrap;
+font-weight:bold;
+border:1px solid transparent;
+}
+
+.nav-item:hover{
+background:#1fc75f;
+color:#fff;
+transform:translateY(-2px);
+}
+
+.active{
+background:#1fc75f;
+color:white;
+border:1px solid #8fffaa;
+}
+
+/* GREEN BAR */
+
+.green-bar{
+background:#1fc75f;
+height:35px;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:1px;
+background:#c9dccc;
+margin-top:10px;
+}
+
+.stat-box{
+background:white;
+padding:18px;
+}
+
+.stat-title{
+font-size:14px;
+color:gray;
+margin-bottom:10px;
+}
+
+.stat-value{
+font-size:30px;
+font-weight:bold;
 }
 
 /* MAIN */
-.main{
-margin-left:230px;
+
+.container{
+background:white;
+margin:20px;
 padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.topbar{
+.toolbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:20px;
 }
 
-.topbar h2{
-margin:0;
-color:#00ff99;
+.left-tools{
+display:flex;
+gap:10px;
 }
 
-.admin{
-background:#111;
-padding:10px 15px;
-border-radius:10px;
-border:1px solid #00ff99;
+select,input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:4px;
+width:220px;
 }
 
-/* CARDS */
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-}
-
-.card{
-background:#111;
-padding:20px;
-border-radius:15px;
-border:1px solid rgba(0,255,153,0.3);
-box-shadow:0 0 10px rgba(0,255,153,0.1);
-}
-
-.card h3{
-margin:0;
-font-size:18px;
-color:#00ff99;
-}
-
-.card p{
-font-size:28px;
+button{
+padding:10px 16px;
+border:none;
+border-radius:4px;
+cursor:pointer;
 font-weight:bold;
-margin-top:10px;
 }
 
-/* TABLE */
-.tableBox{
-margin-top:25px;
-background:#111;
-padding:15px;
-border-radius:15px;
-border:1px solid rgba(0,255,153,0.2);
-overflow:auto;
+.admin-btn{
+background:#0f7b32;
+color:white;
 }
 
-.tableBox h3{
-margin-top:0;
-color:#00ff99;
+.search-btn{
+background:#1ea84b;
+color:white;
 }
 
-table{
-width:100%;
-border-collapse:collapse;
+.table-wrapper{overflow-x:auto;}
+
+table{width:100%;border-collapse:collapse;min-width:1300px;}
+th,td{padding:14px;border-bottom:1px solid #ddd;font-size:14px;}
+th{background:#063d17;color:white;}
+
+.status-active{
+background:#1db954;
+color:white;
+padding:5px 10px;
+border-radius:5px;
 }
 
-th,td{
-padding:12px;
-text-align:left;
-border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-th{
-color:#00ff99;
-}
-
-.approve{
-background:#00aa00;
-color:#fff;
-border:none;
-padding:8px 12px;
-border-radius:8px;
+.action-btn{
+background:#063d17;
+color:white;
+padding:6px 10px;
+border-radius:4px;
 cursor:pointer;
-}
-
-.reject{
-background:red;
-color:#fff;
-border:none;
-padding:8px 12px;
-border-radius:8px;
-cursor:pointer;
-margin-left:5px;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-.sidebar{
-width:100%;
-height:auto;
-position:relative;
-}
-
-.main{
-margin-left:0;
-}
-
-.cards{
-grid-template-columns:1fr 1fr;
-}
+margin-right:5px;
 }
 
 </style>
+
 </head>
+
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-<div class="logo">10Cricket</div>
+<script>
+// 🔐 ACCESS
+let role = localStorage.getItem("role");
+if(role !== "mother"){
+alert("Access Denied ❌");
+window.location.href="login.html";
+}
 
-<div class="menu">
-<a href="#">👑 Mother Panel</a>
-<a href="#">🛡 Super Admin</a>
-<a href="#">⚡ Admin</a>
-<a href="#">🧩 Sub Admin</a>
-<a href="#">🌐 Super Agent</a>
-<a href="#">🎯 Agent</a>
-<a href="#">📊 Dashboard</a>
-<a href="#">👥 Users</a>
-<a href="#">💰 Deposits</a>
-<a href="#">💸 Withdraw</a>
-<a href="#">🎮 Bet History</a>
-<a href="#">⚙ Settings</a>
-<a href="#" onclick="logout()">🚪 Logout</a>
+function openPage(p){ location.href=p; }
+
+function createSuperAdmin(){
+let name = prompt("Super Admin Name");
+let pass = prompt("Password");
+if(!name || !pass) return;
+
+let data = JSON.parse(localStorage.getItem("super_admin")) || [];
+data.push({name,pass,role:"super_admin"});
+localStorage.setItem("super_admin",JSON.stringify(data));
+alert("Super Admin Created ✅");
+}
+</script>
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+<div class="logo">MOTHER PANEL</div>
+<div class="top-right">
+<div class="top-btn">Mother Admin</div>
+<div class="top-btn">Balance 0.00</div>
+<div class="top-btn" onclick="location.href='index.html'">Logout</div>
 </div>
+</div>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+<div class="nav-item active">🏠 Dashboard</div>
+<div class="nav-item">👑 Super Admin</div>
+<div class="nav-item">⚡ Admin</div>
+<div class="nav-item">🧩 Sub Admin</div>
+<div class="nav-item">🌐 Agent</div>
+</div>
+
+<div class="green-bar"></div>
+
+<!-- STATS -->
+
+<div class="stats">
+<div class="stat-box"><div class="stat-title">Super Admin</div><div class="stat-value">0</div></div>
+<div class="stat-box"><div class="stat-title">Admin</div><div class="stat-value">0</div></div>
+<div class="stat-box"><div class="stat-title">Agents</div><div class="stat-value">0</div></div>
+<div class="stat-box"><div class="stat-title">Users</div><div class="stat-value">0</div></div>
 </div>
 
 <!-- MAIN -->
 
-<!-- CREATE PANELS -->
-<div style="margin-bottom:20px;background:#111;padding:20px;border-radius:15px;border:1px solid rgba(0,255,153,0.2);">
-<h3 style="margin-top:0;color:#00ff99;">Create Panel</h3>
+<div class="container">
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
-<button class="approve">Create Super Admin</button>
-<button class="approve">Create Admin</button>
-<button class="approve">Create Sub Admin</button>
-<button class="approve">Create Super Agent</button>
-<button class="approve">Create Agent</button>
-<button class="approve">Create User</button>
+<div class="toolbar">
+<div class="left-tools">
+<input placeholder="Search...">
+<button class="search-btn">Search</button>
 </div>
 
-</div>
+<button class="admin-btn" onclick="createSuperAdmin()">+ Create Super Admin</button>
 
-<!-- HIERARCHY -->
-<div class="tableBox">
-<h3>Panel Hierarchy</h3>
+</div>
 
 <table>
+<thead>
 <tr>
-<th>Level</th>
-<th>Create Access</th>
-<th>Controls</th>
+<th>Name</th>
+<th>Role</th>
+<th>Status</th>
 </tr>
-
-<tr>
-<td>👑 Mother Panel</td>
-<td>Super Admin</td>
-<td>Full Access</td>
-</tr>
-
-<tr>
-<td>🛡 Super Admin</td>
-<td>Admin</td>
-<td>Manage Admin</td>
-</tr>
-
-<tr>
-<td>⚡ Admin</td>
-<td>Sub Admin</td>
-<td>Manage Sub Admin</td>
-</tr>
-
-<tr>
-<td>🧩 Sub Admin</td>
-<td>Super Agent</td>
-<td>Manage Super Agent</td>
-</tr>
-
-<tr>
-<td>🌐 Super Agent</td>
-<td>Agent</td>
-<td>Manage Agent</td>
-</tr>
-
-<tr>
-<td>🎯 Agent</td>
-<td>User</td>
-<td>Manage Users</td>
-</tr>
-
+</thead>
+<tbody>
+<tr><td colspan="3">No Data</td></tr>
+</tbody>
 </table>
-</div>
-
-
-<div class="main">
-
-<div class="topbar">
-<h2>Mother Panel</h2>
-<div class="admin">Admin</div>
-</div>
-
-<!-- CARDS -->
-<div class="cards">
-
-<div class="card">
-<h3>Total Users</h3>
-<p>1520</p>
-</div>
-
-<div class="card">
-<h3>Total Deposit</h3>
-<p>$12,500</p>
-</div>
-
-<div class="card">
-<h3>Total Withdraw</h3>
-<p>$4,800</p>
-</div>
-
-<div class="card">
-<h3>Live Bets</h3>
-<p>320</p>
-</div>
 
 </div>
-
-<!-- TABLE -->
-<div class="tableBox">
-<h3>Recent Deposit Requests</h3>
-
-<table>
-<tr>
-<th>User</th>
-<th>Amount</th>
-<th>Method</th>
-<th>Action</th>
-</tr>
-
-<tr>
-<td>Rahim</td>
-<td>$100</td>
-<td>bKash</td>
-<td>
-<button class="approve">Approve</button>
-<button class="reject">Reject</button>
-</td>
-</tr>
-
-<tr>
-<td>Karim</td>
-<td>$50</td>
-<td>Nagad</td>
-<td>
-<button class="approve">Approve</button>
-<button class="reject">Reject</button>
-</td>
-</tr>
-
-</table>
-</div>
-
-</div>
-
-<script>
-
-function logout(){
-localStorage.removeItem("currentUser");
-window.location.href="login.html";
-}
-
-</script>
 
 </body>
 </html>
-```
