@@ -198,7 +198,6 @@ All users must agree to policies before using services.
 
 function togglePassword(){
 let password = document.getElementById("password");
-
 password.type = (password.type === "password") ? "text" : "password";
 }
 
@@ -210,10 +209,14 @@ let pass = document.getElementById("password").value;
 
 if(user === "admin" && pass === "1234"){
 
+// ✅ ONLY FIX ADDED
 localStorage.setItem("currentUser", user);
+localStorage.setItem("role", "mother");
 
 alert("Login Successful ✅");
-window.location.href = "index.html";
+
+// 👉 Mother Panel redirect
+window.location.href = "motherpanel.html";
 
 }else{
 alert("Wrong Username or Password ❌");
