@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10cricket.live Login</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(#062b06,#4caf00);
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.top{
+width:100%;
+padding:0 10px;
+box-sizing:border-box;
+}
+
+.top img{
+width:100%;
+height:auto;
+display:block;
+border-radius:0 0 25px 25px;
+box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* LOGIN FORM */
+.form{
+width:92%;
+max-width:380px;
+margin-top:25px;
+}
+
+/* INPUT */
+.inputBox{
+margin-bottom:15px;
+}
+
+.inputBox input{
+width:100%;
+height:55px;
+border-radius:15px;
+border:none;
+outline:none;
+padding:0 15px;
+font-size:16px;
+background:#f2f2f2;
+box-sizing:border-box;
+}
+
+/* PASSWORD */
+.passwordBox{
+position:relative;
+}
+
+.passwordBox input{
+padding-right:45px;
+}
+
+.toggle{
+position:absolute;
+right:15px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
+font-size:18px;
+}
+
+/* BUTTON */
+.btn{
+width:100%;
+height:55px;
+border:none;
+border-radius:15px;
+background:#000;
+color:#ffcc00;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* LINKS */
+.links{
+text-align:center;
+margin-top:10px;
+font-size:14px;
+}
+
+.links a{
+color:#000;
+text-decoration:underline;
+}
+
+/* FOOTER */
+footer{
+background:#0b0b0b;
+color:#fff;
+padding:25px 15px;
+text-align:center;
+margin-top:40px;
+width:100%;
+}
+
+.footer-links{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+font-size:13px;
+margin-top:10px;
+}
+
+.footer-links a{
+color:#fff;
+text-decoration:none;
+opacity:0.85;
+}
+
+.small{
+margin-top:10px;
+font-size:12px;
+opacity:0.6;
+}
+
+.bottom-text{
+text-align:center;
+padding:15px;
+font-size:12px;
+color:#000;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP BANNER -->
+<div class="top">
+<img src="login-banner.png">
+</div>
+
+<!-- LOGIN FORM -->
+<div class="form">
+
+<form id="loginForm">
+
+<div class="inputBox">
+<input type="text" id="username" placeholder="Username" required>
+</div>
+
+<div class="inputBox passwordBox">
+<input type="password" id="password" placeholder="Password" required>
+<span class="toggle" onclick="togglePassword()">👁</span>
+</div>
+
+<button class="btn" type="submit">LOGIN</button>
+
+</form>
+
+<div class="links">
+<a href="#">Forgot Password?</a>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+<p style="margin:0;font-size:14px;opacity:0.8;">
+© 2026 10cricket.live | All Rights Reserved
+</p>
+
+<div class="footer-links">
+<a href="#">Privacy Policy</a>
+<a href="#">Terms</a>
+<a href="#">Rules</a>
+<a href="#">KYC</a>
+<a href="#">Responsible Gaming</a>
+<a href="#">About Us</a>
+</div>
+
+<p class="small">
+Entertainment only platform
+</p>
+
+</footer>
+
+<div class="bottom-text">
+All users must agree to policies before using services.
+</div>
+
+<script>
+
+function togglePassword(){
+let password = document.getElementById("password");
+
+password.type = (password.type === "password") ? "text" : "password";
+}
+
+document.getElementById("loginForm").addEventListener("submit", function(e){
+e.preventDefault();
+
+let user = document.getElementById("username").value;
+let pass = document.getElementById("password").value;
+
+if(user === "admin" && pass === "1234"){
+
+localStorage.setItem("currentUser", user);
+
+alert("Login Successful ✅");
+window.location.href = "index.html";
+
+}else{
+alert("Wrong Username or Password ❌");
+}
+
+});
+
+</script>
+
+</body>
+</html>
